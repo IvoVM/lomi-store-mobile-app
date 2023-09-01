@@ -1,0 +1,11 @@
+<ion-label class="Montserrat title-input" position="stacked">Ingresa la dirección</ion-label>
+<input ngx-google-places-autocomplete [value]="initialValue" [options]='options' placeholder="Dirección completa " #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+<div class="error" *ngIf="errorPLaces.country">
+  No repartimos en este pais
+</div>
+<div class="error" *ngIf="errorPLaces.state">
+  No repartimos en esta region
+</div>
+<div class="error" *ngIf="errorPLaces.countie">
+  No repartimos en esta ciudad
+</div>

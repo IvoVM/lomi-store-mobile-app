@@ -1,0 +1,8 @@
+<div *ngIf="shipment && (nextPromotion || !autohide)" feature-flag name="flexible-bar-promotions" [defaultValue]="true"  class="bg-tertiary  p {{ !autohide ? 'flexible-promotions-bar-tall' : 'flexible-promotions-bar'}} {{showing || !autohide ? 'upper' : 'hide'}}">
+  <p *ngIf="nextPromotion">Agrega <span class="primary-color">${{displayAmountToReach}}</span> para obtener <span class="primary-color">{{nextPromotion.name}}</span></p>
+  <p *ngIf="!nextPromotion && currentPromotion">Tienes <span class="primary-color">{{currentPromotion.name}}</span></p>
+  <ion-progress-bar style="height:5px;border-radius:25px" color="primary" [value]="nextPromotion ? currentPercent : 100"></ion-progress-bar>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

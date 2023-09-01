@@ -1,0 +1,71 @@
+.description {
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+ion-row {
+  width: 100%;
+}
+
+.options {
+  width: 100%;
+
+  .option-value {
+    border: 1px solid var(--ion-color-primary);
+    display: inline-block;
+    width: auto;
+    margin: 5px 3px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    
+    border: 1px solid var(--ion-color-primary) !important;
+    color: var(--ion-color-primary);
+    &.active {
+      background-color: var(--ion-color-primary);
+      color: white !important;
+    }
+  }
+}
+
+.addProductButton{
+}
+
+.variant{
+
+}
+
+.taxons {
+  width: 100%;
+
+  .taxon-pill {
+    color: var(--ion-color-primary);;
+    display: inline-block;
+    width: auto;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 7px;
+    background: #d7f7ec;
+  }
+}
+
+.border-top {
+  padding-top: 15px;
+  margin-top: 20px;
+}
+
+.dcto-price {
+  color: #FF7663;
+  text-decoration: line-through;
+}
+
+.dcto-percentage {
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+  background: #FF7663;
+  border-radius: 10px;
+  padding: 6px;
+  color: #fff;
+  margin: 0;
+  left: 10px;
+}

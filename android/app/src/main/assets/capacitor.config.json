@@ -1,0 +1,28 @@
+{
+	"appId": "cl.lomi.app",
+	"appName": "lomi",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"androidScaleType": "CENTER_CROP"
+		},
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		},
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "394847830425-fcpmrpp1sc03vrjdt63ibpi2j0sqi2rj.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		}
+	},
+	"cordova": {}
+}

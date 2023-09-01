@@ -1,0 +1,99 @@
+<ion-grid class="ion-text-center ion-padding">
+  <ion-row>
+    <ion-col size="12" class="ion-margin-top">
+      <img src="assets/images/logo.svg" width="175px" alt="logo" class="ion-margin-end">
+    </ion-col>
+    <ion-col size="12">
+      <h3 class="subtitle">¡Nos alegra verte aquí!</h3>
+    </ion-col>
+    <form [formGroup]="loginForm" novalidate style="width: 100%">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Mail</ion-label>
+          <ion-input placeholder="lomi@lomi.cl" class="ion-text-left ion-margin-bottom" formControlName="email"
+            type="email"></ion-input>
+        </ion-item>
+
+        <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.email.errors?.required">
+          Este campo es requerido
+        </div>
+        <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.email.errors?.pattern">
+          Ingresa un correo válido
+        </div>
+        <ion-item>
+          <ion-label position="stacked">
+            Contraseña
+          </ion-label>
+          <ion-input placeholder="••••••"
+                   class="ion-text-left ion-margin-bottom"
+                   formControlName="password"
+                   type="password"></ion-input>  
+        </ion-item>
+              
+      <h6 (click)="goToForgotPassword()" class="forgotPassword">Olvidé mi contraseña</h6>
+
+        <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.password.errors?.required">
+          Este campo es requerido
+        </div>
+
+      </ion-col>
+      <div class="error ion-padding-bottom" *ngIf="loginError">
+        Correo o clave inválidas
+      </div>
+      <ion-col size="12">
+        <!-- (click)="openModalAccount()"-->
+        <ion-button (click)="signIn()" id="sign-in-button" style="--background:var(--ion-color-primary);--color: white"
+                    expand="block">Ingresar
+        </ion-button>
+      </ion-col>
+    </form>
+    <div id="phone-sign-in-recaptcha"></div>
+    <!--    <ion-col size="6">-->
+    <!--      <ion-button style="&#45;&#45;background:#dd4b39;&#45;&#45;color:white" expand="block" (click)="loginGoogle()">-->
+    <!--        <ion-icon name="logo-google"></ion-icon>-->
+    <!--      </ion-button>-->
+    <!--    </ion-col>-->
+    <!--    <ion-col size="6">-->
+    <!--      <ion-button style="&#45;&#45;background:#3b5998;&#45;&#45;color:white" expand="block"(click)="loginFb()">-->
+    <!--        <ion-icon name="logo-facebook"></ion-icon>-->
+    <!--      </ion-button>-->
+    <!--    </ion-col>-->
+    <h1></h1>
+    <ion-col feature-flag [variant]="2" name="google-sign-in" size="12">
+      <h6 class="or">And</h6>
+    </ion-col>
+    <ion-col feature-flag [variant]="0" name="google-sign-in" size="12">
+      <h6 class="or">o</h6>
+    </ion-col>
+    <ion-col feature-flag name="google-sign-in" size="12">
+      <ion-button expand="block" id="google-sign-in" (click)="googleSignIn()" fill="outline" class="googleButton">
+        <img class="googleLogo" src="../assets/images/google-logo.png"> Ingresar con google
+      </ion-button>
+    </ion-col>
+    <ion-col feature-flag name="google-sign-in-firebase" size="12">
+      <ion-button expand="block" (click)="signInGoogleFirebase()" fill="outline" class="googleButton">
+        <img class="googleLogo" src="../assets/images/google-logo.png"> Ingresar con google
+      </ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button feature-flag name="sign-in-firebase-apple" (click)="signInAppleFirebase()" class="apple-button" expand="block">Ingresar con Apple
+      </ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button feature-flag name="sign-in-firebase-sms" (click)="loginWIthSms()" style="--background:var(--ion-color-primary);--color: white" expand="block">Ingresar SMS
+      </ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button feature-flag name="sign-in-firebase-email" (click)="firebaseAuth()" style="--background:var(--ion-color-primary);--color: white" expand="block">user password firebase
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <h6>&nbsp;</h6>
+    </ion-col>
+    <ion-col size="12">
+      <h6 class="question">¿No tienes una cuenta aún?</h6>
+      <ion-button [routerLink]="'/registration'" (click)="trackRegister()" fill="clear" class="subtitle register">
+        Registrate</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

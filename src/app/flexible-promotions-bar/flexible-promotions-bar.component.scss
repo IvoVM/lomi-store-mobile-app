@@ -1,0 +1,30 @@
+.flexible-promotions-bar{
+    position: fixed;
+    height: 152px;
+    width: 100vw;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    transition: 0.4s ease;
+    color: white;
+    &-tall{
+        position: fixed;
+        width: 100vw;
+        bottom: 0;
+        border-radius: 20px 20px 0 0;
+        transition: 0.4s ease;
+        color: white;
+        height: 152px !important;
+        p{
+            margin: 0.5em 0;
+            font-size: 14px;
+        }
+    }
+    p{
+        margin: 0.5em 0;
+        font-size: 14px;
+    }
+}
+
+.hide{
+    transform: translateY(200px);
+}

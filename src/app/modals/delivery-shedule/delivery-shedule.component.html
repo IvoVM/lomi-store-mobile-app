@@ -1,0 +1,46 @@
+<ion-content class="ion-padding">
+  <ion-button class="close-button" (click)="closeModal()" fill="clear">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </ion-button>
+  <h2 *ngIf="shipmentType == 'Delivery'" class="color-tertiary Montserrat">Selecciona el día y la franja horaria en que quieres recibir tu
+    pedido:</h2>
+
+    <h2 *ngIf="shipmentType == 'Pickup'" class="color-tertiary Montserrat">Selecciona el día y la franja horaria en que quieres pasar a buscar tu
+      pedido:</h2>
+  <div *ngIf="days" class="delivery-day">
+    <ng-container *ngFor="let day of days; let i = index">
+      <ion-button [ngClass]="{'select-delivery': deliveryDay === day}" [disabled]="(day === 'Hoy' && disabledToday) || (day === 'Mañana' && disabledTomorrow)"
+        class="btn btn-day" color="darkbluelomi" (click)="setDeliveryDay(day, i)" fill="clear" shape="round">
+        <span>  
+          {{day}}
+        </span>
+      </ion-button>
+    </ng-container>
+  </div>
+
+  <div *ngIf="hoursCopy" class="delivery-hour">
+    <ng-container *ngFor="let hour of hoursCopy">
+      <ion-button [ngClass]="{'select-delivery': deliveryHour.blok === hour.blok}" class="btn btn-hour" color="darkbluelomi"
+        (click)="setDeliveryHour(hour)" expand="block" fill="clear" shape="round">
+        <span>
+          <ion-icon *ngIf="deliveryHour.blok !== hour.blok" class="ellipse-icon" color="dark-lomi" slot="start"
+            name="ellipse-outline"></ion-icon>
+          <ion-icon *ngIf="deliveryHour.blok === hour.blok" class="ellipse-icon ellipse-icon-select" color="dark-lomi"
+            slot="start" name="ellipse"></ion-icon>
+            <img *ngIf="hour.blok.includes('Inmediata')" src="../../../assets/images/lightning_fill.svg" style="margin-right: 0.4em;">
+          {{hour.blok}}
+        </span>
+      </ion-button>
+    </ng-container>
+    <div *ngIf="hoursCopy.length == 0">
+      <h2 class="color-tertiary Montserrat"></h2>
+    </div>
+  </div>
+  <div style="margin-bottom: 5em;"></div>
+</ion-content>
+
+<ion-footer class="custom-ion-footer">
+  <ion-button (click)="setDeliveryShedule()" expand="block" shape="round">
+    Programar entrega
+  </ion-button>
+</ion-footer>

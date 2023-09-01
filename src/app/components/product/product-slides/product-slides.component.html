@@ -1,0 +1,52 @@
+<ng-container *ngIf="!hideIfDoesntLoaded || loadedTaxon">
+
+  <div *ngIf="!products">
+  </div>
+  <ng-content></ng-content>
+  <ng-container *ngIf="productsCarrousel.length >= 1 || producer">
+    <ng-container *ngIf="taxon == 1981">
+
+      <div class="important-sales-container">
+        <div class="important-sales-header" >
+          <img style="background-color: #FFFFFF; margin-left: 2em; height: 1.8em; width: 1.8em; padding: 4px;" src="../../../../assets/images/fire_2.svg" alt="">
+          <p class="Montserrat ion-padding" style="font-size: 16px; color: #FFFFFF; font-weight: 600; margin-right: 0;">Promos imperdibles</p>
+        </div>
+        <div style="position: absolute;top: 34%;right: 0;font-size: 25px;z-index: 2; border-radius: 10px 0 0 10px"
+          class="arrow-btn" (click)="slideNext()">
+        </div>
+
+        <div class="slide-scroll">
+          <div class="p-l montserrat product-slide-content">
+            <div *ngFor="let product of productsCarrousel">
+              <app-product-card [product]="product" (click)="openProduct(product)"></app-product-card>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-container>
+
+    <app-title-link [taxonId]="taxon" [noLink]="productsCarrousel.length <= 3" *ngIf="!producer && taxon != 1981"></app-title-link>
+    <ng-container *ngIf="taxon != 1981">
+      <div
+        style="position: relative;">
+        <div style="position: absolute;top: 34%;right: 0;font-size: 25px;z-index: 2; border-radius: 10px 0 0 10px"
+          class="arrow-btn" (click)="slideNext()">
+        </div>
+
+        <div class="slide-scroll">
+          <div class="p-l montserrat product-slide-content">
+            <div *ngFor="let product of productsCarrousel">
+              <app-product-card [product]="product" (click)="openProduct(product)"></app-product-card>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-container>
+
+    <div *ngIf="showDivider" class="ion-padding">
+      <div class="divider"></div>
+    </div>
+  </ng-container>
+</ng-container>

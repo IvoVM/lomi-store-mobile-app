@@ -1,0 +1,24 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>FAQs</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" class="btn-dismiss">OK</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ng-container *ngIf="!faqs">
+      <app-loader-spinner></app-loader-spinner>
+    </ng-container>
+    <ion-row *ngIf="faqs">
+      <ion-col size="12">
+        <h3>Condiciones de uso</h3>
+      </ion-col>
+      <ion-col size="12">
+        <div [innerHTML]="faqs"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

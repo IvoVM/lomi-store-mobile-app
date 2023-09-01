@@ -1,0 +1,141 @@
+<ion-header translucent class="shadow">
+  <ion-toolbar>
+    <ion-title class="Montserrat dark-blue-lomi title-header">Nueva tarjeta</ion-title>
+    <ion-buttons slot="start">
+      <ion-button class="start-button" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+
+  <div class="card">
+    <div class="flip-card" #rotateCard>
+
+      <div class="front-card ion-padding" >
+        <img *ngIf="brand == 'VISA'" src="../../../assets/images/visa_2.png">
+        <img class="mastercard" *ngIf="brand == 'Mastercard'" src="../../../assets/images/mastercard.png">
+
+        <div class="data-card" >
+          <h1 class="Montserrat name-card">{{paymentCardForm.controls.numberCard.value?
+            paymentCardForm.controls.numberCard.value: '____ ____ ____ ____'}}</h1>
+          <div class="bottom-card">
+            <h1 class="Montserrat" *ngIf="paymentCardForm.controls.fullName.value">{{paymentCardForm.controls.fullName.value.length >= 25 ? 
+              (paymentCardForm.controls.fullName.value.slice(0,25)+' ....' | uppercase): (paymentCardForm.controls.fullName.value | uppercase)}}</h1>
+            <h1 class="Montserrat" *ngIf="!paymentCardForm.controls.fullName.value">-------------------</h1>
+            <h1 class="Montserrat">{{paymentCardForm.controls.expireAt.value? paymentCardForm.controls.expireAt.value:
+              'M/A'}}</h1>
+          </div>
+        </div>
+      </div>
+      <div class="back-card" >
+        <div class="back-card-container ion-padding" >
+          <div class="rectangle">
+
+          </div>
+          <h1 class="cvv">{{paymentCardForm.controls.CVV.value? paymentCardForm.controls.CVV.value:
+            'CVV'}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="paymentCardForm" (submit)="registerCard()">
+    <ion-slides #mySlides (ionSlideDidChange)="slideChanged()" mode="ios" [options]="slideOpts">
+      <ion-slide>
+        <ion-label class="title-input" position="stacked">Número de tarjeta</ion-label>
+        <ion-input autofocus="true" minlength="13" max="99" formControlName="numberCard" style="text-align: start;" type="number"
+          inputmode="numeric"></ion-input>
+        <div class="error"
+          *ngIf="paymentCardForm.controls.numberCard.touched && paymentCardForm.controls.numberCard.errors?.required">
+          El número de la tarjeta es requerido
+        </div>
+        <div class="error"
+          *ngIf="paymentCardForm.controls.numberCard.touched && paymentCardForm.controls.numberCard.errors?.max">
+          El número de tarjeta es de un máximo de 16 dígitos
+        </div>
+        <div class="error"
+          *ngIf="paymentCardForm.controls.numberCard.touched && paymentCardForm.controls.numberCard.errors?.minlength">
+          Ingrese un número valido
+        </div>
+        <div class="error" *ngIf="paymentCardForm.controls.numberCard.touched && brand == 'ERROR'">
+          Ingrese una trajeta valida
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-label class="title-input" position="stacked">Nombre completo</ion-label>
+        <ion-input formControlName="fullName" type="text" inputmode="text"></ion-input>
+        <div class="error"
+          *ngIf="paymentCardForm.controls.fullName.touched && paymentCardForm.controls.fullName.errors?.required">
+          El nombre de la tarjeta es requerido
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+          <ion-col size="6">
+            <ion-label class="title-input" position="stacked">Fecha de expiración</ion-label>
+            <ion-input (ionInput)="expireAtFormat($event)" value="{{expireAt}}" maxlength="5" formControlName="expireAt"
+              type="text" inputmode="numeric"></ion-input>
+            <div class="error"
+              *ngIf="paymentCardForm.controls.expireAt.touched && paymentCardForm.controls.expireAt.errors?.required">
+              La fecha de expiració es requerida
+            </div>
+            <div class="error"
+              *ngIf="paymentCardForm.controls.expireAt.touched && paymentCardForm.controls.expireAt.errors?.pattern">
+              Ingrese una fecha valida
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <ion-label class="title-input" position="stacked">CVV</ion-label>
+            <ion-input (ionFocus)="CVVFocus()" (ionBlur)="CVVFocusOut()" maxlength="4" formControlName="CVV"
+              type="password" inputmode="numeric">
+            </ion-input>
+            <div class="error"
+              *ngIf="paymentCardForm.controls.CVV.touched && paymentCardForm.controls.CVV.errors?.required">
+              El CVV es requerido
+            </div>
+            <div class="error"
+              *ngIf="paymentCardForm.controls.CVV.touched && paymentCardForm.controls.CVV.errors?.max">
+              El CVV de tarjeta es de un máximo de 4 dígitos
+            </div>
+            <div class="error"
+              *ngIf="paymentCardForm.controls.CVV.touched && paymentCardForm.controls.CVV.errors?.min">
+              El CVV de tarjeta es de un minimo de 3 dígitos
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+    </ion-slides>
+  </form>
+
+
+  <div  *ngIf="isFirst" class="warning-message">
+    <ion-icon class="warning-icon" name="alert-circle-outline"></ion-icon>
+    <ion-label>Cobraremos $50 para validar tu tarjeta, luego serán devueltos.</ion-label>
+  </div>
+
+  <ion-buttons class="slides-buttons">
+    <ion-button visible="false" *ngIf="isFirst">
+    </ion-button>
+    <ion-button *ngIf="!isFirst" style="color: #424962;" (click)="mySlides.slidePrev()">
+      <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+      Anterior
+    </ion-button>
+    <ion-button *ngIf="!isEnd" (click)="slideNext()">
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      Siguiente
+    </ion-button>
+
+    <ion-button *ngIf="isEnd" (click)="registerCard()">
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      Registrar tarjeta
+    </ion-button>
+  </ion-buttons>
+
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-content>
+  <div *ngIf="box">
+    <div class="header"></div>
+    <div class="close-modal">
+      <ion-icon (click)="closeModal()" style="font-size: 1.5em;" name="close-outline"></ion-icon>
+    </div>
+    <div class="body ion-padding" style="padding-top: 0 !important; margin-bottom: 0;">
+      <h2 class="box-rice Montserrat">${{boxPrice | number}}</h2>
+      <h2 class="box-title" style="margin-top: 1em;">{{box.title}}</h2>
+    </div>
+
+    <div class="ion-padding" style="padding-top: 0; display: flex; justify-content: space-between; width: 100%; align-items: center;">
+      <p class="Montserrat warning">Agrega uno, algunos o todos los productos!
+      </p>
+      <ion-icon style="margin-top: -1px; font-size: 25px; color: #03c686; fill: #03c686;" name="information-circle-outline"></ion-icon>
+    </div>
+    <div class="slide-scroll">
+      <div class="p-l montserrat product-slide-content">
+        <div *ngFor="let product of products">
+          <app-product-card [product]="product" (click)="openProduct(product)"></app-product-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="ion-padding">
+      <p class="Montserrat message">Puede que no todos los items del mix esten disponibles en stock. Recuerda chequear tu carrito!</p>
+    </div>
+
+    <div class="ion-padding">
+      <ion-button (click)="addAllProducts()" expand="full" shape="round">
+        <div class="inner-button">
+          <span>${{boxPrice | number}}</span>
+          <span>Agregar todos</span>
+        </div>
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>

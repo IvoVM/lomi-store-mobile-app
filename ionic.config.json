@@ -1,0 +1,8 @@
+{
+  "name": "lomi",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

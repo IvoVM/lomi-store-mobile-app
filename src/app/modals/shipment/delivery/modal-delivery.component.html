@@ -1,0 +1,52 @@
+<ion-content class="modal-cont">
+  <div class="header">
+    <ion-button (click)="dismiss()" fill="clear">
+      <ion-icon class="back-icon" slot="icon-only" color="tertiary" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="title color-tertiary Montserrat">Elige a donde lo llevamos</h1>
+  </div>
+
+  <ion-list>
+    <ng-container *ngIf="!addressesList">
+      <app-loader-spinner></app-loader-spinner>
+    </ng-container>
+    <ion-item >
+      <h4 class="info Montserrat ion-text-center">
+        <span class="gray-light">¡Despachamos dentro de los 60 minutos!</span>
+      </h4>
+    </ion-item>
+    <div class="divider"></div>
+    <ng-container *ngFor="let address of addressesList">
+
+      <ion-item>
+        <ion-label (click)="onAddressSelected(address)">
+          <ion-row>
+            <ion-col style="display:flex;align-items:center;" size="1">
+              <ion-icon name="ellipse-outline"></ion-icon>
+            </ion-col>
+            <ion-col size="11">
+              <h3 class="Montserrat color-tertiary">{{address.attributes.firstname | titlecase}}
+                {{address.attributes.lastname | titlecase}}</h3>
+              <p class="Montserrat color-tertiary">{{address.attributes.address1 | titlecase}},
+                {{address.attributes.address2}}</p>
+              <p class="Montserrat color-tertiary" style="font-size: 14px;">{{address.attributes.city | titlecase}}</p>
+            </ion-col>
+
+          </ion-row>
+        </ion-label>
+      </ion-item>
+      <div class="divider"></div>
+    </ng-container>
+  </ion-list>
+  <div class="nav-space"></div>
+  <ion-toolbar style="position: fixed; bottom: 10px;">
+    <ion-button (click)="onCreateAddress()" expand="block">Crear dirección nueva</ion-button>
+  </ion-toolbar>
+</ion-content>
+<!--
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="onCreateAddress()" expand="block">Añadir Dirección</ion-button>
+  </ion-toolbar>
+</ion-footer>
+-->

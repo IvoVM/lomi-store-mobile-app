@@ -1,0 +1,32 @@
+ion-icon {
+  vertical-align: sub;
+}
+
+page-home {
+  button {
+    align-items: baseline;
+  }
+}
+
+.accordion-container {
+  font-size: .9rem;
+
+  .accordion-item {
+    margin: 0;
+
+    .header {
+      padding: 7px;
+    }
+
+    &-content {
+      .item {
+        padding: 7px 7px 7px 15px;
+        opacity: .8;
+
+        &:last-child {
+          padding-bottom: 15px;
+        }
+      }
+    }
+  }
+}

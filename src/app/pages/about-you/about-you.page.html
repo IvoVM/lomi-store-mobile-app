@@ -1,0 +1,97 @@
+<ion-header *ngIf="newUser" translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" class="btn-dismiss">
+        <ion-icon class="back-button" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="goBack()" class="btn-dismiss">
+        <span class="skip">saltar</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="!newUser" style="margin-bottom: 55%;">
+  <app-about-you-head></app-about-you-head>
+</ion-header>
+
+<ion-content fullscren>
+
+  <h1 *ngIf="newUser" class="ion-padding Montserrat title-page">Sobre tí...
+    <ion-icon (click)="showPopover($event)" slot="end" name="alert-circle"></ion-icon>   
+  </h1>
+
+
+  <ion-grid class="ion-padding">
+    <form [formGroup]="personalInfoForm" (submit)="create()">
+      <ion-row>
+
+        <ion-col size="12">
+          <div class="label-container">
+            <ion-label class="title-input" position="stacked">Nombre</ion-label>
+            <ion-label class="title-input required" position="stacked">Campo obligatorio*</ion-label>
+          </div>
+          <ion-input formControlName="first_name" type="text" placeholder="Nombre"></ion-input>
+          <div class="error" *ngIf="personalInfoForm.controls.first_name.touched && personalInfoForm.controls.first_name.errors?.required">
+            El nombre es requerido
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <div class="label-container">
+            <ion-label class="title-input" position="stacked">Apelllido</ion-label>
+            <ion-label class="title-input required" position="stacked">Campo obligatorio*</ion-label>
+          </div>
+          <ion-input formControlName="last_name" type="text" placeholder="Apelllido"></ion-input>
+          <div class="error" *ngIf="personalInfoForm.controls.last_name.touched && personalInfoForm.controls.last_name.errors?.required">
+            El apellido es requerido
+          </div>
+        </ion-col>
+
+        <ion-col size="12" (click)="selectCounty()">
+          <div class="label-container">
+            <ion-label class="title-input" position="stacked">Comuna</ion-label>
+            <ion-label class="title-input required" position="stacked">Campo obligatorio*</ion-label>
+          </div>
+          <ion-input readonly formControlName="county_id" type="text" placeholder="Busca tu comuna" [ngModel]="county ? county.name : ''"></ion-input>
+          <div class="error" *ngIf="personalInfoForm.controls.county_id.touched && personalInfoForm.controls.county_id.errors?.required">
+            La comuna es requerida
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-label class="title-input" position="stacked">Nacimiento</ion-label>
+          <ion-input maxlength="10" value="{{date}}" (ionInput)="formatDate($event)" formControlName="born_date" type="text" placeholder="DD/MM/AAAA" inputmode="numeric"></ion-input>
+          <div class="error" *ngIf="personalInfoForm.controls.born_date.value && personalInfoForm.controls.born_date.errors?.pattern">            Ingrese una fecha valida
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-label class="title-input" position="stacked">Género</ion-label>
+          <ion-select formControlName="gender" placeholder="Seleccionar tu genero">
+            <ion-select-option value="Másculino">Másculino</ion-select-option>
+            <ion-select-option value="Femenino">Femenino</ion-select-option>
+            <ion-select-option value="Otro">Otro</ion-select-option>
+          </ion-select>
+        </ion-col>
+
+      </ion-row>
+    </form>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer style="padding-bottom: 5%;">
+  <ion-grid >
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="create()" [disabled]="!personalInfoForm.valid" style="--background:var(--ion-color-primary);--color: white; height: 2.5em;" expand="block">
+          Finalizar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

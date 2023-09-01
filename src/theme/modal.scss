@@ -1,0 +1,153 @@
+.change-direction-warning-dialog, .stock-dialog, .schedule-modal, .recover-password-message, .checkout-note, .add-discount-modal, .set-default-card, .redirect-to-webpay, 
+.lomi-box-modal, .lomi-box-category-modal, .delivery-shedule {
+  bottom: 0;
+  position: absolute;
+  opacity: 1;
+  --border-radius: 20px 20px 0 0;
+  --height:20em;
+  --backdrop-opacity: 0.3;
+  .modal-wrapper{
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.delivery-shedule {
+  --height: 75%;
+  border-radius: 0px;
+  .modal-wrapper{
+    border-radius: 40px 40px 0 0;
+  }
+}
+.stock-repeat-order-modal {
+  --height: 9em;
+  --width: 90vw;
+  --border-radius: 20px;
+  margin-bottom: 50vh;
+}
+
+.add-discount-modal {
+  --height: 10em !important;
+}
+
+.lomi-box-category-modal {
+  --border-radius: 40px 40px 0px 0px;
+  --height: 90vh ;
+  position: absolute;
+  top: 10%;
+  .modol-wrapper {
+    --border-radius: 40px 40px 0px 0px;
+    border-radius: 40px 40px 0px 0px;
+  }
+}
+
+.lomi-box-modal {
+  --height: 40em !important;
+  .modal-wrapper {
+    --border-radius: 40px 40px 0px 0px;
+  }
+}
+
+
+.delete-address-modal {
+  --height: 10.5em !important;
+
+}
+
+.recover-password-message, .set-default-card {
+  --height: 12em !important;
+}
+.modal-on-center{
+  --height: 24em;
+  --width: 95%;
+  --border-radius: 20px;
+  align-items: center !important;
+}
+
+.checkout-note {
+  --height: 14em !important;
+}
+
+.stock-dialog{
+  --height: 15em !important;
+}
+
+.input-modal, .modal-85vh, .modal-sm {
+  align-items: flex-end;
+  --border-radius: 25px 25px 0 0;
+  position: absolute;
+  bottom: 0;
+    .modal-wrapper{
+    position: absolute;
+    bottom: 0;
+    --border-radius: 20px 20px 0 0;
+  }
+}
+.input-modal{
+  --height: 13em !important;
+}
+.modal-85vh{
+  --height: 85vh !important;
+}
+.modal-sm {
+  --height: 7em !important;
+  }
+.schedule-modal{
+  --height: 20em !important;
+}
+
+.redirect-to-webpay {
+  --height: 19em !important;
+}
+
+
+.ion-page{
+  overflow: visible !important;
+}
+.shipment-modal {
+  align-items: flex-end;
+  --height: 33em !important;
+  --border-radius: 30px 30px 0 0 !important;
+  position: absolute;
+  bottom: 0;
+}
+
+.shipment-pickup {
+  --height: 40em !important;
+  position: absolute;
+  bottom: 0;
+}
+
+.shipment-pickup .modal-wrapper {
+  border-radius: 100% !important;
+}
+
+.shipment-modal .modal-wrapper, .shipment-pickup .modal-wrapper{
+  background: transparent;
+  --border-radius: 40px;
+  position: absolute;
+  bottom: 0;
+  overflow: visible !important;
+
+}
+
+.modal-class .btn-dismiss {
+  font-weight: 700;
+}
+.modal-class {
+  --background: transparent !important;
+}
+
+.drag-line {
+  width: 96px;
+  height: 6px;
+  margin-left: calc(50% - 48px);
+  margin-top:0.5em;
+  background-color: #E5E5E5;
+  border-radius: 12px;
+}
+
+ion-modal{
+  align-items: end;
+}
+

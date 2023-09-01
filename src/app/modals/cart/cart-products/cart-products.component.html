@@ -1,0 +1,66 @@
+<ion-item-sliding>
+
+  <ion-item class=" product-container" *ngIf="item">
+  
+    <ion-row style="padding: 16px 8px;width:100%;align-items: center;" class="product-row">
+      <ion-col (click)="openProduct()" size="3" style="display:flex;">
+        <img shadow style="background-color: white; border-radius: 10px;margin:auto;margin-top:-6px !important;;" src="{{imageUrl}}" alt="product" class="shadow-2 img-product">
+      </ion-col>
+      <ion-col (click)="openProduct()" size="6" class="ion-no-margin">
+        <ion-row [ngClass]="{'no-stock' : noStock && cartContext}">
+          <ion-col size="12">
+            <h4 style="color:#424962" class="title">{{item.attributes.name.length >= 24 ? item.attributes.name.slice(0,19)+'...' :
+              item.attributes.name}}</h4>
+            <h4 style="color:#424962" class="price ion-no-margin">{{ item.attributes.display_price }}</h4>
+            <p color="#B0B1B2" class="option-value">{{item.attributes.options_text?.split(":")[1]}}</p>
+          </ion-col>
+  
+          <ion-col size="12" *ngIf="orderToken">
+            <p class="ion-no-margin">Cantidad: {{item.attributes.quantity}}</p>
+          </ion-col>
+  
+          <ion-col size="12" class="ion-no-padding">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="8" class="ion-no-padding">
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="12" class="ion-text-center" *ngIf="!orderToken && noStock">
+                    <ion-row class="ion-align-items-center">
+                      <ion-col size="12">
+
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+  
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3" style="display:flex">
+
+        <ion-row class="ion-align-items-center buttons" *ngIf="!orderToken">
+         <div class="btn-container" *ngIf="!noStock">
+           <ion-button *ngIf="!disabled" (click)="item.attributes.quantity > 1 ? removeItem(item) : deleteItem(item)" fill="clear" [disabled]="changingQuantity || loadingButton">
+             <ion-icon  src="assets/icons/minus_trans.svg"></ion-icon>
+           </ion-button>
+           <ion-button style="color:#424962" fill="clear" disabled="true" class="add-button">
+             <h6 *ngIf="!changingQuantity && !loadingButton" style="margin: 0;">{{item.attributes.quantity}}</h6>
+            <ion-spinner *ngIf="changingQuantity || loadingButton"></ion-spinner>
+            </ion-button>
+           <ion-button *ngIf="!disabled" (click)="addItem(item, $event)" fill="clear" [disabled]="changingQuantity || loadingButton">
+             <ion-icon src="assets/icons/plus_trans.svg"></ion-icon>
+          </ion-button>
+         </div>
+         <div *ngIf="noStock" (click)="deleteItem(item)" class="btn-container no-stock-container">
+           Sin stock  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+         </div>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+  <ion-item-options side="end">
+    <ion-item-option color="danger" (click)="deleteItem(item)" style="color:white">Eliminar</ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

@@ -1,0 +1,22 @@
+<div class="ion-padding" style="margin-top: 50%;">
+  <h1 class="text-center Montserrat">¡Oye!<br>Necesitamos<br>revalidar tus datos</h1>
+  <p class="text-center Montserrat">Para ello, necesitamos que ingreses el monto que se te ha cobrado por inscribir tu tarjeta aquí:</p>
+  <div class="text-center" style="display: flex; justify-content: center; align-items: center;">
+    <h2 style="font-size: 35px; padding-bottom: 5px; color: #2D2D2D;">$</h2>
+    <ion-input (ionChange)="setOtpValue($event)" inputmode="numeric" maxlength="3"  autofocus="true"></ion-input>
+  </div>
+
+  <ion-buttons class="validate-buttons">
+
+    <ion-button style="color: #424962;" (click)="backButton()">
+      <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+      Anterior
+    </ion-button>
+    <ion-button (click)="otpValidate()">
+      <ion-icon slot="end" name="chevron-forward-outline" ></ion-icon>
+      Siguiente
+    </ion-button>
+
+  </ion-buttons>
+
+</div>

@@ -1,0 +1,22 @@
+#sorry-avocado{
+    position: absolute;
+    bottom: 7.5em;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.circle{
+    padding-top: 3em;
+    border-radius: 50%;
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    bottom: -160px;
+    left: -200px !important;
+}

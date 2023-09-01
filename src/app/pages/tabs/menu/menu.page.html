@@ -1,0 +1,122 @@
+<ion-content [scrollEvents]="true" fullscren> 
+  <div class="header-menu shadow">
+    <!-- <div class="user-icon">
+      <img *ngIf="userImage" [src]="userImage" style="width: 100%; height: 100%; border-radius: 50%;">
+      <img *ngIf="!userImage" src="/assets/images/person-fill.png">
+    </div> -->
+      <div class="ion-padding">
+        <h3 class="montserrat color-primary">Hola,</h3>
+        <h2 *ngIf="userName"  class="montserrat color-primary">{{userName | uppercase}}</h2>
+        <h2 *ngIf="!userName && !userEmail.includes('privaterelay.appleid.com')"  class="montserrat color-primary">{{userEmail.length >= 19 ? userEmail.slice(0,19)+'...': userEmail}}</h2>
+        <h3 class="montserrat dark-blue-lomi">¡Qué bueno que estés aquí!</h3>
+      </div>
+  </div>
+
+
+  <div class="body-menu">
+
+    <div class="ion-padding" style="height: 52%;">
+      <ion-button style="height: 52px;" (click)="sendWhatsapp()" expand="block" shape="round" color="darkbluelomi">
+        <img class="avocado-img" src="../../../../assets/images/customer_service.svg" alt="">
+        <span class="customer-service-text">¿Necesitas ayuda? ¡Te escuchamos!</span>
+      </ion-button>
+
+    </div>
+
+      <h2 class="title-items Montserrat" style="margin-top: 0.1em;">Mi cuenta</h2>
+
+      <ion-list class="items-list shadow">
+
+        <ion-item feature-flag name="lomi-puntos" [variant]="true" class="items" (click)="goToLomiPuntos()">
+          <ion-label class="Montserrat">LOMI Puntos</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+        
+        <div class="divider"></div>
+
+        <ion-item class="items" (click)="goToProfile()">
+          <ion-label class="Montserrat">Perfil y contraseña</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+
+        <div class="divider"></div>
+
+        <ion-item class="items">
+          <ion-label class="Montserrat" (click)="goToAddresses()">Mis direcciones</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+        <div class="divider"></div>
+        
+        <ion-item class="items">
+          <ion-label (click)="onSelectedModalOpen(ModalTarget.ORDERS)" class="Montserrat ">Mis pedidos</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+        <div class="divider"></div>
+
+        <ion-item class="items">
+          <ion-label (click)="openMilesLatamModal()" class="Montserrat ">Mis millas latam</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+
+        <ion-item id="prime" class="items prime">
+          <ion-label (click)="goToPrime()" class="Montserrat" style="display: flex; align-items: center;"><img src="../../../../assets/icons/prime.svg" style="margin-right: 0.5em;"> <b>¡Obten envios gratis ilimitados!</b></ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+
+        <ion-item feature-flag name="expires-prime" *ngIf="isPrime" class="items" style="height: auto;">
+          <ion-label>
+            <h3><b>Tu subscripción Prime caduca en:</b></h3>
+            <p>{{ primeExpirationIn }} días - {{ primeExpiration | date:'shortDate' }}</p>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+
+      <h2 feature-flag name="payment-methods-page"  class="title-items Montserrat">Configuración</h2>
+
+      <ion-list feature-flag name="payment-methods-page" class="items-list shadow">
+        <ion-item class="items">
+          <ion-label (click)="goToPaymentMethods()" class="Montserrat ">Medios de pago</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+      <h2 class="title-items Montserrat">Mi Información</h2>
+
+      <ion-list class="items-list shadow">
+        <ion-item class="items">
+          <ion-label (click)="onSelectedModalOpen(ModalTarget.FAQS)" class="Montserrat ">Preguntas frecuentes</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+        <div class="divider"></div>
+
+        <ion-item class="items">
+          <ion-label (click)="onSelectedModalOpen(ModalTarget.TERMS)" class="Montserrat ">Terminos y condiciones</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+
+        <ion-item class="items" *ngIf="deleteAccountFlag">
+          <ion-label (click)="deleteAccount()" class="Montserrat ">Eliminar cuenta</ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+
+        <div class="divider"></div>
+
+        <ion-item class="items">
+          <ion-label (click)="goToLomiProviders()" class="Montserrat ">¿Eres productor? <b>¡Sé parte de Lomi!</b></ion-label>
+          <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+        </ion-item>
+
+      </ion-list>
+
+  </div>
+  
+  <ion-button class="singOut" (click)="onLogout()">
+    <h2 class="Montserrat dark-blue-lomi">Cerrar sesión</h2>
+  </ion-button>
+  <p class="text-center dark-blue-lomi" style="opacity: 0.6; font-size: 0.9em;">v{{appVersion}} ({{wwwVersion}}).</p>
+  <div class="nav-space"></div>
+  <div class="nav-space"></div>
+
+  
+</ion-content>

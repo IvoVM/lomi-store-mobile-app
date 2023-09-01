@@ -1,0 +1,35 @@
+.delivery-container {
+    background-color: white;
+    border-radius: 20px;
+    padding: 0.8em 1em;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.03);
+
+    h3 {
+        font-size: 1.1em;
+        color: #00C686;
+        margin-top: 0px;
+    }
+}
+
+footer {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+h4 {
+    font-size: 0.8em;
+    color: #424962;
+    margin-bottom: 0px;
+}
+
+p {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #424962;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+

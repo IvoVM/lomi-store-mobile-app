@@ -1,0 +1,49 @@
+<ion-card class="product-card montserrat" #card activable>
+  <div class="container">    
+    <ng-container>
+      <ion-fab *ngIf="product && product.attributes.individual_sale && optionValues.length == 1" class="fab-{{quantityInCart > 0 ? 'open' : 'close'}}">
+        <ion-toolbar color="white" style="padding: 0 !important;">
+          <ion-buttons slot="primary">
+            <ng-container *ngIf="quantityInCart > 0">
+              <ion-spinner *ngIf="removingItem && !hideAllLoading && !hideLoading" color="primary" name="crescent"></ion-spinner>
+              <ion-button *ngIf="!removingItem || (hideAllLoading || hideLoading)" color="primary" size="small" (click)="removeItem($event, quantityInCart)" [ngClass]="hideLoading && removingItem ? 'deactivated-opacity' : ''">
+                <ion-icon slot="icon-only" src="assets/icons/minus_trans.svg"></ion-icon>
+              </ion-button>
+              <ion-spinner *ngIf="(removingItem || addingItem) && (!hideAllLoading && !hideLoading)"  name="dots"></ion-spinner>
+              <ion-button *ngIf="!removingItem && !addingItem || (hideAllLoading || hideLoading)" size="small" disabled="true" class="add-button">
+                {{quantityInCart}}
+              </ion-button>
+            </ng-container>
+            <ion-spinner *ngIf="addingItem && !hideAllLoading && !hideLoading" color="primary" name="crescent"></ion-spinner>
+            <ion-button *ngIf="!addingItem || hideLoading || hideAllLoading" color="primary" size="small" (click)="addItem($event)" class="add-button " [ngClass]="hideLoading && addingItem ? 'deactivated-opacity' : ''">
+              <ion-icon slot="icon-only" src="assets/icons/plus_trans.svg"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-fab>
+      <ion-row>
+        <ion-col size="12" class="img-container {{getProductImg(product)? '' : 'charging'}} ion-text-center" >
+          <img *ngIf="!getProductImg(product)" src="../../../../assets/images/product_1.png" alt="producer">
+          <img *ngIf="product && getProductImg(product)" src="{{ reducedSize(getProductImg(product)?.attributes.cdn_url) }}" alt="producer">
+        </ion-col>
+        <ion-col *ngIf="product" size="12" class="body ion-align-self-center product-card-text">
+          <h4 class="price dcto-percentage orange-lomi-background" *ngIf="discountPresent">{{getDiscountPercentage()}}%</h4>
+          <ion-row class="dcto-row">
+            <h4 class="black price product-card-text">{{getPrice()}}</h4>
+            <h4 class="price dcto-price orange-lomi product-card-text" *ngIf="discountPresent">&nbsp;{{master.attributes.display_compare_at_price}}</h4>
+          </ion-row>      
+          <h3 class="title montserrat product-card-text">{{product.attributes.name.length >= 35 ? product.attributes.name.slice(0,33)+'...' : product.attributes.name}}</h3>
+        </ion-col>
+        <ion-col *ngIf="!product" size="12" class="body ion-align-self-center">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>      
+    </ng-container>
+  </div>
+  <h3 *ngIf="product && optionValues.length == 1" class="options-text montserrat product-card-text">{{ product.attributes.options_text?.split(":")[1] }}</h3>
+  <div *ngIf="optionValues.length > 1" class="alternatives-block"></div>
+  <h3 *ngIf="optionValues.length > 1" class="options-text alternatives-text montserrat product-card-text">Ver&nbsp;alternativas</h3>
+</ion-card>

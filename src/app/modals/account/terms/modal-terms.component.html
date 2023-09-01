@@ -1,0 +1,24 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Términos y condiciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" class="btn-dismiss"><ion-icon color="tertiary" name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ng-container *ngIf="!terms">
+      <app-loader-spinner></app-loader-spinner>
+    </ng-container>
+    <ion-row *ngIf="terms">
+      <ion-col size="12">
+        <h3>Condiciones de uso</h3>
+      </ion-col>
+      <ion-col size="12">
+        <div [innerHTML]="terms"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

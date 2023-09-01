@@ -1,0 +1,78 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" class="btn-dismiss">
+        <ion-icon class="back-button" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscren>
+  <h1 class="ion-padding Montserrat title-page">¡Bienvenid@! <br>creemos tu cuenta</h1>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <form [formGroup]="registerForm" (submit)="signUp()" novalidate style="width: 100%">
+        <ion-col size="12">
+          <ion-label class="Montserrat title-input" position="stacked">Mail</ion-label>
+          
+          <ion-input placeholder="Correo electrónico"
+                     formControlName="email"
+                     type="email"
+                     class="ion-margin-bottom ion-text-left">
+          </ion-input>
+            
+          <div class="error ion-padding-bottom" *ngIf="errorCtr.email.touched && errorCtr.email.errors?.required">
+            Este campo es requerido
+          </div>
+          <div class="error ion-padding-bottom" *ngIf="errorCtr.email.touched && errorCtr.email.errors?.pattern">
+            Ingresa un correo válido
+          </div>
+          <ion-label class="Montserrat title-input" position="stacked">Contraseña</ion-label>
+          <ion-input placeholder="Contraseña"
+                     formControlName="password"
+                     class="ion-text-left ion-margin-bottom"
+                     type="password">
+          </ion-input>
+          <div class="error ion-padding-bottom" *ngIf="errorCtr.password.touched && errorCtr.password.errors?.required">
+            Este campo es requerido
+          </div>
+          <ion-label class="Montserrat title-input" position="stacked">Repetir contraseña</ion-label>
+          <ion-input placeholder="Confirmar Contraseña"
+                     formControlName="password_confirmation"
+                     class="ion-text-left"
+                     type="password">
+          </ion-input>
+          <div class="error ion-padding-bottom" *ngIf="errorCtr.password_confirmation.touched && errorCtr.password_confirmation.errors?.required">
+            Este campo es requerido
+          </div>
+        </ion-col>
+        <ng-container *ngIf="registerError">
+          <div class="error ion-padding-bottom" *ngFor="let error of registerError">
+            {{error}}
+          </div>
+        </ng-container>
+      </form>
+    </ion-row>
+  </ion-grid>
+ 
+</ion-content>
+
+<ion-footer style="padding-bottom: 5%;">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" feature-flag name="register" [variant]="0">
+        <ion-button  (click)="signUp()" [disabled]="!registerForm.valid" style="--background:var(--ion-color-primary);--color: white; height: 2.5em;"
+          expand="block">
+          Guardar
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" feature-flag name="register" [variant]="1">
+        <ion-button  (click)="signUpV1()" [disabled]="!registerForm.valid" style="--background:var(--ion-color-primary);--color: white; height: 2.5em;"
+          expand="block">
+          Guardar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

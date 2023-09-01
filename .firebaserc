@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "lomi-35ab6": {
+      "hosting": {
+        "app": [
+          "lomi-35ab6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "lomi-35ab6"
+  }
+}

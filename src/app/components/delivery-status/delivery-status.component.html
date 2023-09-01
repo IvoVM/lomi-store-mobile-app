@@ -1,0 +1,18 @@
+<div *ngIf="actualOrder" class="delivery-container">
+  <h3>{{state.title}}</h3>
+  <div style="border: 0.5px solid #00C686;"></div>
+  <footer>
+    <div>
+      <h4>{{state.subTitle}}</h4>
+      <p *ngIf="actualOrder.scheduled_at && state.state != 'Completado'">{{actualOrder.scheduled_at | date:'dd/MM'}} {{ hoursRange[0] }}:00 - {{ hoursRange[1] }}:00 </p>      
+      <p *ngIf="time != 0">{{time | date: 'dd/M/yy'}}</p>
+      <p *ngIf="time == 0 && !actualOrder.scheduled_at && state.state != 'Completado' && state.state != 'Fallido'">En menos de 1 hora</p>
+      <p *ngIf="time == 0 && state.state == 'Completado'">Ya llego</p>
+      <p *ngIf="time == 0 && state.state == 'Fallido'">Comunicate con nostros</p>
+    </div>
+    <ion-button (click)="openModal()" shape="round" size="small">
+      Mas info
+    </ion-button>
+  </footer>
+  
+</div>

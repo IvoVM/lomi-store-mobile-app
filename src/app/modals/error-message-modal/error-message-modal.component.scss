@@ -1,0 +1,83 @@
+#sorry-avocado{
+    position: absolute;
+    bottom: 7.5em;
+}
+
+@media screen and (min-width: 770px){
+    #sorry-avocado{
+        position: absolute;
+        bottom: 6em;
+        height: 250;
+    }
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.circle{
+    padding-top: 3em;
+    border-radius: 50%;
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    bottom: -160px;
+    left: -200px !important;
+}
+
+@media screen and (min-width: 390px) {
+    .circle {
+        width: 1000px;
+    }
+}
+
+.button-container {
+    position: absolute;
+    bottom: 20px;
+    padding: 0px 10px;
+    width: 100%;
+
+    ion-button  {
+        width: 100%;
+    }
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #424962;
+    margin-top: 0px;
+  }
+  
+  h3 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.408px;
+    color: #424962;
+  }
+
+  .titles-container {
+    margin-top: 40%;
+  }
+
+  @media screen and (max-height: 710px) {
+    .titles-container {
+        margin-top: 10% !important;
+      } 
+  }
+
+  @media screen and(max-height: 550px) {
+    .titles-container {
+        margin-top: 0px !important;
+      } 
+  }
+

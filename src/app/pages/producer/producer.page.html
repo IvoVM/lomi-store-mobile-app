@@ -1,0 +1,16 @@
+<ion-content *ngIf="producer">
+  <ion-row>
+    <ion-col class="ion-padding-vertical" size="10" offset="1">
+      <app-producer-card [producer]="producer" [imgWidth]="150"></app-producer-card>
+    </ion-col>
+  </ion-row>
+  <app-title-link *ngIf="products && products.length" [title]="'Productos'"></app-title-link>
+  <ng-container *ngIf="!products">
+    <app-loader-spinner></app-loader-spinner>
+  </ng-container>
+  <ion-row class="ion-text-center p">
+    <ion-col size="4"  *ngFor="let product of products">
+      <app-product-card class="margin-between" (click)="openProduct(product)" [product]="product"></app-product-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

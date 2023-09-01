@@ -1,0 +1,104 @@
+.greetings-container {
+    text-align: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    p{
+        color: white !important;
+        font-size: 0.8em;
+    }
+    
+    ion-button{
+        width: 100%;
+        padding: 0 10px;
+        
+    }
+
+
+    h6 {
+        font-weight: 600;
+    }
+}
+
+
+.greetings-container{
+    ion-button{
+        width: 100%;
+        position: fixed;
+        bottom: 5%;
+        left: 0%;
+        padding: 0 10px;
+
+    }
+    .ellipse{
+        position: fixed;
+        width: 796px;
+        height: 407px;
+        left: -194px;
+        bottom: -15%;
+        background: #424962;
+        border-radius: 50%;
+        z-index: -1;
+
+        img{
+            position: fixed;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            height: 21em;
+            bottom: 15%;
+        }
+    }
+}
+
+.title {
+    margin-top: 30vh;
+    font-weight: 700;
+}
+
+@media screen and (max-height: 730px) {
+    .title {
+        margin-top: 15vh;
+    }
+}
+
+@media screen and (min-width: 530px) {
+    .greetings-container{
+        .ellipse {
+            width: 950px;
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .greetings-container{
+        .ellipse {
+            width: 1050px;
+        }
+    }
+}
+
+@media screen and (min-width: 810px) {
+    .greetings-container{
+        .ellipse {
+            width: 1200px;
+        }
+    }
+}
+
+@media screen and (min-width: 950px) {
+    .greetings-container{
+        .ellipse {
+            width: 1400px;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .greetings-container{
+        .ellipse {
+            width: 2000px;
+        }
+    }
+}
+

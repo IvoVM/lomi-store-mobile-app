@@ -1,0 +1,15 @@
+<div class="p title-container" (click)="goToLink()">
+  <p style="max-width: 70%;" *ngIf="title && title != 'Promociones'" class="montserrat dark-blue-lomi" [innerHtml]="title"></p>
+  <p  style="max-width: 70%;" *ngIf="title && title === 'Promociones'" class="montserrat dark-blue-lomi">Más promociones</p>
+  <ion-skeleton-text animated style="width: 70%" *ngIf="!title"></ion-skeleton-text>
+
+
+  
+    <ng-container>
+      <ion-button fill="clear" class="montserrat show-more"  *ngIf="link && !noLink">Ver todos
+      </ion-button>
+    </ng-container>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

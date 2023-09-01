@@ -1,0 +1,72 @@
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h2 {
+        margin-top: 13vh;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #00C686;
+    }
+
+    h1 {
+        margin-top: 18px;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 34px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #00C686;
+    }
+
+    ion-label {
+        margin-top: 32px;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #424962;
+    }
+}
+
+.ellipse {
+    position: fixed;
+    width: 541px;
+    height: 31%;
+    left: -50px;
+    bottom: -10%;
+    background: #BAF1DE;
+    transform: rotate(-9deg);
+    border-radius: 50%;
+}
+
+.bolsa_1 {
+    position: fixed;
+    left: 32%;
+    bottom: 59%;
+}
+
+.brillo_1 {
+    position: absolute;
+    right: 21.6%;
+    bottom: 121%;
+    transform: rotate(-10.16deg);
+}
+
+.brillo_2 {
+    position: absolute;
+    right: 22%;
+    bottom: 141%;
+    transform: rotate(9.47deg);
+}
+
+.brillo_3 {
+    position: absolute;
+    right: 16%;
+    bottom: 137%;
+}

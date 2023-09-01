@@ -1,0 +1,49 @@
+<div class="modal-container" class="ion-padding">
+  <h3 style="font-size: 1em;">{{state.title}}</h3>
+  <ion-progress-bar buffer="1" [value]="state.progress" color="progresslomi"></ion-progress-bar>
+  <div class="body">
+    <div class="divider"></div>
+    <div class="space">
+      <div>
+        <h4>{{state.subTitle}}</h4>
+        <p *ngIf="actualOrder.scheduled_at && state.state != 'Completado'">{{actualOrder.scheduled_at | date:'dd/MM'}} {{ hoursRange[0] }}:00 - {{ hoursRange[1] }}:00 </p>      
+        <p *ngIf="time != 0">{{time | date: 'dd/M/yy'}}</p>
+        <p *ngIf="time == 0 && !actualOrder.scheduled_at && state.state != 'Completado'">En menos de 1 hora</p>
+        <p *ngIf="time == 0 && state.state == 'Completado'">Ya llego</p>
+        <p *ngIf="time == 0 && state.state == 'Fallido'">Comunicate con nostros</p>
+      </div>
+      <div (click)="goToOrder()" style="display: flex; align-items: center; flex-direction: column;">
+        <ion-icon style="font-size: 30px;" slot="icon-only" src="../../../../assets/images/ticket.svg"></ion-icon>
+        <p class="hel-text">Resumen de compra</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="space">
+      <div>
+        <h4>Despacho a:</h4>
+        <p>{{actualOrder.name}}</p>
+      </div>
+      <div (click)="sendWhatsapp()" style="display: flex; align-items: center; flex-direction: column;">
+        <ion-icon style="font-size: 40px;" slot="icon-only" src="../../../../assets/images/customer_service.svg">
+        </ion-icon>
+        <p class="hel-text">¿Necesitas ayuda?</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <h4>Despacho Dirección</h4>
+    <p>{{actualOrder.ship_address_address1}} {{actualOrder.ship_address_address2 ? actualOrder.ship_address_address2: ''
+      }}</p>
+    <div class="divider"></div>
+    <ng-container *ngIf="actualOrder.journeys">
+      <h4>Despachado por</h4>
+      <p *ngIf="actualOrder.journeys.providerId == 1">Uber </p>
+      <p *ngIf="actualOrder.journeys.providerId == 2">Hermex </p>
+      <p *ngIf="actualOrder.journeys.providerId == 3">Cabify </p>
+      <div class="divider"></div>
+      <ion-button *ngIf="actualOrder.journeys.providerId == 1" class="track_button" (click)="openExternalTracking()"
+        expand="block" shape="round" color="lightLomi">
+        Seguir Pedido
+      </ion-button>
+    </ng-container>
+  </div>
+</div>

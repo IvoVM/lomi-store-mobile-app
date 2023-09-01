@@ -1,0 +1,36 @@
+<ion-tabs #tabs  (ionTabsWillChange)="getCurrentTab()" no-animation class="blue-lomi">
+  <ion-tab-bar style="transition:0.4s ease;" slot="bottom">
+    <ion-tab-button [style.color]="activeTabName == 'home' ? '#03c686': '#424962'" class="home-tab" tab="home">
+      <ion-icon *ngIf="activeTabName != 'home'" src="../../../assets/images/home.svg"></ion-icon>
+      <ion-icon *ngIf="activeTabName === 'home'" src="../../../assets/images/home_selected.svg"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [style.color]="activeTabName == 'products' ? '#03c686': '#424962'" class="products-tab" tab="products">
+      <ion-icon style="width: 24px; height: 24px;" src="assets/icons/tabs/products_icon.svg"></ion-icon>
+      <ion-label>Categorías</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button [style.color]="activeTabName == 'sales' ? '#03c686': '#424962'" class="sales-tab" tab="sales" (click)="salesClicked()">
+      <ion-icon src="assets/icons/sales.svg"></ion-icon>
+      <ion-label>Ofertas</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button *ngIf="discoverTab" [style.color]="activeTabName == 'discover' ? '#03c686': '#424962'" class="discover-tab" tab="discover" (click)="goToTdiscover()">
+      <ion-icon src="assets/icons/tabs/discover_icon.svg"></ion-icon>
+      <ion-label>Descubre</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [style.color]="activeTabName == 'menu' ? '#03c686': '#424962'" *ngIf="loggedIn" tab="menu">
+      <ion-icon src="assets/icons/menu.svg"></ion-icon>
+      <ion-label>Menú</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [style.color]="activeTabName == 'menu' ? '#03c686': '#424962'" *ngIf="!loggedIn" (click)="goToMenu()" class="sign-in-tab">
+      <ion-icon src="assets/icons/user.svg"></ion-icon>
+      <ion-label>Ingresar</ion-label>
+    </ion-tab-button>
+    
+  </ion-tab-bar>
+  <app-flexible-promotions-bar></app-flexible-promotions-bar>
+</ion-tabs>

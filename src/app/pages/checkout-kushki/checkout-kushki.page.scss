@@ -1,0 +1,266 @@
+
+.nav-space {
+    height: 0em;
+  }
+  
+  .items-titles {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.35em;
+    margin-top: 1.5em;
+  }
+  
+  .title-left {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #424962;
+  }
+  
+  .title-right { 
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.02em;
+    color: #FF8A00;
+  }
+  
+  .container-items   {
+    background: #FFFFFF;
+    border-radius: 0px 0px 15px 15px;
+  }
+
+  .divider {
+    border: 1px solid #F1F1F1;
+    margin-top: 10px;
+  }
+  
+  .title-note {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.408px;
+    color: #424962;
+  }
+  
+  .note {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.408px;
+    color: #B0B1B3;
+  }
+  
+  .payment-method {
+    
+    ion-col {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 50px;
+    }
+
+    .container-bottom {
+      background-color: #EEEEEE !important; 
+      height: 20px; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      border-radius: 0px 0px 15px 15px;
+    }
+  
+    ion-label {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      letter-spacing: -0.02em;
+      color: #00C686;
+    }
+  }
+  
+  
+  .add-icon {
+    background-color: #00C686;
+    border-radius: 100%; 
+    color: #FFFFFF;
+    font-size: 1.1em;
+  }
+  
+  .latam-button {
+    color: #424962;
+    --border-color: #424962;
+  }
+
+  .label-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0.25em;
+}
+
+  .title-input {
+    font-weight: 500;
+    font-size: 0.7em;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: 0.9em;
+}
+
+.required {
+    font-size: 10px;
+    color: #B0B1B3;
+    text-align: right;
+    margin-top: 10.7px;
+}
+
+ion-input {
+    color: #B0B1B3;
+    margin-top: -0.2em;
+} 
+
+ion-input.has-value, ion-select {
+    color: #424962;
+}
+
+.divider {
+  border: 1px solid #F1F1F1;
+  margin-top: 10px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  color: #424962;
+  margin-top: 0.55em;
+
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0px;
+  letter-spacing: -0.408px;
+  color: #B0B1B3;
+}
+.card-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.card-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ion-button{ 
+      font-size: 1em;
+  }
+}
+
+.icon-container, .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.icon-container {
+  height: 30px;
+  width: 30px;
+}
+
+.logo-container {
+  height: 45px;
+  width: 45px;
+
+  img {
+    max-width: 90%;
+  }
+}
+
+.container-bottom {
+  background-color: #EEEEEE !important; 
+  height: 20px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  border-radius: 0px 0px 15px 15px;
+}
+
+img {
+  border-radius: 0px;
+}
+
+.item-drag {  
+  width: 60px;
+  height: 60px;
+  background: #00C686;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.drag-container {
+  width: 100%;
+  margin-top: 0px;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background: #B2C5BE;
+  box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.03);
+  border-radius: 25px;
+}
+
+.progress-bar-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+
+  span {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+  }
+}
+
+.delivery-select {
+  font-weight: 500;
+  font-size: 0.84em;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  color: #424962;
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #00C686;
+  }
+}
+
+.shipments-container {
+  display: flex;
+  margin-top: 0.5em;
+}
+
+.shipments-scroll {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+}
+

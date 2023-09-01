@@ -1,0 +1,72 @@
+<div>
+  <p>{{errors}}</p>
+  <div class="p-t p-b">
+    <ng-container *ngFor="let promotionInput of inputs">
+      <div class="flex-between promotion-input">
+          <div class="{{promotionInput.active && !promotionInput.sent ? 'active' : 'normal'}}-input">
+            <ion-input (ionBlur)="promotionButton(promotionInput)" #latam_code id="latam_code_input" *ngIf="!promotionInput.sent" [(ngModel)]="promotionInput.value"  color="{{promotionInput.color}}" placeholder="{{promotionInput.placeholder}}"></ion-input>
+          </div>
+          <div class="{{promotionInput.active && !promotionInput.sent ? 'active' : 'normal'}}-button">
+            <ion-button class="input-button" (click)="promotionButton(promotionInput)" fill="{{promotionInput.active || promotionInput.sent ? 'solid' : 'outline'}} " expand="block" fill="outline" color="{{promotionInput.color}}">
+              <div class="flex-between">
+                <span *ngIf="!promotionInput.active || promotionInput.sent">
+                  <span *ngIf="(promotionInput.icon == 'latam' && promotionInput.value ? false : true )">{{promotionInput.name}}</span>
+                  <ion-icon class="promotion-input-icon" *ngIf="promotionInput.icon" src="assets/icons/{{promotionInput.icon}}.svg"></ion-icon>
+                  <b>{{promotionInput.icon == 'latam' && promotionInput.value ? 'N° Socio ' : ''}} {{promotionInput.value}}</b>
+                </span>
+              </div>
+              <div class="icon">
+                <ion-icon *ngIf="promotionInput.sent || (!promotionInput.value)" name="{{promotionInput.active ? 'close' : 'add'}}-circle-outline" class="ion-padding-start close bg-{{!promotionInput.active ? 'white' : promotionInput.color}}"></ion-icon>
+                <p style="font-size:14px" *ngIf="promotionInput.value && !promotionInput.sent" name="checkmark-circle-outline" class="ion-padding-start close bg-{{!promotionInput.active ? 'white' : promotionInput.color}}">Ingresar</p>
+              </div>
+            </ion-button>
+          </div>
+        </div>
+        <p *ngIf="promotionInput.error" class="error-text">
+          {{promotionInput.error}}
+        </p>
+      </ng-container>
+
+
+  </div>
+
+
+  <div class="detail">
+    <div class="subtotal">
+      <ion-row>
+        <ion-col size="6">
+          Subtotal
+        </ion-col>
+        <ion-col size="6" style="text-align:right">
+          {{details.display_item_total}}
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="delivery fee" *ngIf="!refreshing">
+
+      <ion-row *ngFor="let shipment of shipments">
+        <ion-col size="6">
+          Envío <span *ngIf="shipment && !shipment.isPickup">a <span style="color:#2D2D2D">{{addressData.attributes.address1}}</span></span>
+        </ion-col>
+        <ion-col size="6" style="text-align:right">
+          ${{shipment.total || shipment.rebuildedCost}}
+        </ion-col>
+      </ion-row>
+      
+
+    </div>
+    <app-loader-spinner *ngIf="refreshing"></app-loader-spinner>
+    <div class="promotions color-primary" *ngIf="!refreshing && promotions && promotions.length">
+      <p>Más promociones</p>
+      <ion-row *ngFor="let promo of promotions">
+        <ion-col size="6">
+          {{promo.name}}
+        </ion-col>
+        <ion-col size="6" style="text-align:right">
+          {{promo.display_amount}}
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>

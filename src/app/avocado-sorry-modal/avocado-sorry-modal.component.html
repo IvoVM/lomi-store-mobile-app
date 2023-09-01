@@ -1,0 +1,15 @@
+<ion-content scroll-y="false">
+  <div class="p content">
+    <img id="sorry-avocado" src="assets/images/sorry-avocado.svg">
+    <div class="text-center">
+      <h3 class="color-primary"><b>¡UPS!</b></h3>
+      <h4 class="color-primary m-b">Tu pedido está demorando en procesarse más de lo esperado.</h4>
+      <h4 class="bg-tertiary m">Tranquilo/a, a veces nos sucede y lo resolvemos en minutos</h4>
+      <h4 class="m color-tertiary">Puedes visualizar el estado de tu compra en “Tus Pedidos” mientras termine de procesarse o contactar a soporte para más información.</h4>
+    </div>
+  </div>
+  <div class="bg-tertiary circle text-center">
+    <ion-button (click)="goToOrderDetail()" color="primary">Ver resumen y estado de compra</ion-button>
+    <p (click)="intercomOpen()" class="color-primary">Contactar a soporte para mas informacion</p>
+  </div>
+</ion-content>

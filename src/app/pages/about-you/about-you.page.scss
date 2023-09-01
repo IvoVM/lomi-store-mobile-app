@@ -1,0 +1,78 @@
+ion-toolbar {
+    margin: 0 -8px;
+
+    .back-button {
+        font-size: 20px; 
+        color: #424962 !important;
+    }
+}
+
+.title-page {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: -0.7em;
+    padding-bottom: 0px;
+}
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0.25em;
+}
+
+.title-input {
+    font-weight: 500;
+    font-size: 0.7em;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: 0.9em;
+}
+
+.required {
+    font-size: 10px;
+    color: #B0B1B3;
+    text-align: right;
+    margin-top: 10.7px;
+}
+
+ion-input {
+    color: #B0B1B3;
+} 
+
+ion-input.has-value, ion-select {
+    color: #424962;
+}
+
+ion-select {
+    padding-right: 0.8em;
+}
+ion-select::part(icon) {
+    color: #00C686;
+    opacity: 1;
+}
+
+h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-icon {
+        font-size: 20px;
+    }
+}
+
+.skip {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.408px;
+    text-decoration-line: underline;
+    color: #424962;
+}
+

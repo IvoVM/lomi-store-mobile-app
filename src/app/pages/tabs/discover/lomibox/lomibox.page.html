@@ -1,0 +1,42 @@
+<ion-content >
+    <div class="ion-padding">
+        <ion-searchbar  class="searchbar" placeholder="Busca tu lomi-mix perfecto" (ionChange)="filterItems($event)">
+        </ion-searchbar>
+    </div>
+
+    <app-lomi-mix-categories [titleLink]="false" ></app-lomi-mix-categories>
+
+    <div style="margin-top: -5px;">
+        <div style="display: flex; position: relative; padding-left: 1em;">
+            <h2 class="Monteserrat" style="margin-top: 1.5em; margin-left: 0;">Todas nuestras Lomi-Mix</h2>
+            <div class="icon-bg">
+                <ion-icon style=" font-size: 30px; color: #03c686; fill: #03c686;" name="information-circle-outline"></ion-icon>
+            </div>
+        </div>
+
+        <ion-grid  fixed style="margin-top: 0.5em;">
+            <ion-row >
+                <ion-col style="margin-top: 0px;" *ngFor="let box of lomiBox |searchBox:filterValue" size="6">
+                    <app-lomibox-card [box]="box" ></app-lomibox-card>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!lomiBox.length">
+                <ion-col  size="6" >
+                    <ion-skeleton-text  animated style="height: 250px; width: 90%; border-radius: 20px;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col  size="6" >
+                    <ion-skeleton-text  animated style="height: 250px; width: 90%; border-radius: 20px;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col  size="6" >
+                    <ion-skeleton-text  animated style="height: 250px; width: 90%; border-radius: 20px;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col  size="6">
+                    <ion-skeleton-text  animated style="height: 250px; width: 90%; border-radius: 20px;"></ion-skeleton-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+    <div class="nav-space"></div>
+    <div class="nav-space"></div>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Mis direcciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" class="btn-dismiss"><ion-icon color="tertiary" name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-button style="--background:var(--ion-color-primary);--color: white" expand="block" (click)="openCreate()">
+          Crear Dirección
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ng-container *ngIf="!addressesList">
+      <app-loader-spinner></app-loader-spinner>
+    </ng-container>
+    <ion-row class="border-top ion-padding-horizontal" *ngFor="let address of addressesList">
+      <ion-col size="8">
+        <h4 class="color-primary" (click)="openCreate(address)">
+          <ion-icon name="create-outline"></ion-icon>
+          {{address.attributes.firstname}} {{address.attributes.lastname}}
+        </h4>
+        <p style="margin-bottom:0 !important;">{{address.attributes.address1}}, {{address.attributes.county_name}}, {{address.attributes.city}}</p>
+        <p class="grey-lomi" style="margin-top:0 !important;">
+          {{address.attributes.address2}}
+        </p>
+      </ion-col>
+      <ion-col size="4" class="ion-text-end" >
+        <h4 class="ion-color-danger" (click)="removeAddress(address.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

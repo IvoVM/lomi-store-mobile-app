@@ -1,0 +1,12 @@
+<div *ngIf="producer" class="producer" (click)="producerClicked()">
+    <div size="12">
+      <img src="assets/images/producer_1.png" alt="producer" *ngIf="!producer.profile_image" class="producer-img">
+      <img src="{{img}}" alt="producer" *ngIf="producer.profile_image" class="producer-img">
+    </div>
+    <div size="12" class="ion-align-self-center" [ngStyle]="{'margin': imgWidth ? '10px 0' : '0'}">
+      <h3 class="title" [ngStyle]="{'font-size': imgWidth ? '1.1em' : '.7em'}">{{producer.name}}</h3>
+    </div>
+    <div size="12" class="ion-align-self-center ion-text-center" *ngIf="imgWidth">
+      <p class="subtitle">{{producer.about_us}}</p>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+name: Cypress Tests
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.14.0-chrome99-ff97
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v4 
+        with:
+          browser: chrome
+          build: npm run build
+          wait-on: npx wait-on --timeout 120000 http://127.0.0.1:8100
+          start: npm run start
+          record: true  
+        env:
+          CYPRESS_RECORD_KEY: "6a21840c-9dc8-4950-880f-774ea2cbfa02"

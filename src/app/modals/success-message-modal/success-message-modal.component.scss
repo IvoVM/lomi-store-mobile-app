@@ -1,0 +1,41 @@
+.error-message {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #E0FFF4;
+}
+h2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #00C686;
+}
+  
+h3 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.408px;
+    color: #424962;
+}
+
+.ellipse {
+    position: fixed;
+    width: 600px;
+    height: 309px;;
+    left: -50px;
+    bottom: -10%;
+    background: #BAF1DE;
+    transform: rotate(-7.12deg);
+    border-radius: 50%;
+
+}
+
+

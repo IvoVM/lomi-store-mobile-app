@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "394847830425",
+    "firebase_url": "https://lomi-35ab6-default-rtdb.firebaseio.com",
+    "project_id": "lomi-35ab6",
+    "storage_bucket": "lomi-35ab6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394847830425:android:9b599789cc339b190f9308",
+        "android_client_info": {
+          "package_name": "cl.lomi.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394847830425-527vbbb1mjq4jpfr00tl3cuesomolo4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cl.lomi.app",
+            "certificate_hash": "2271cdbb157c142ff46290f16f331fbea40c6076"
+          }
+        },
+        {
+          "client_id": "394847830425-mbogabl67am0rrauholq3hi6sqa3rute.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cl.lomi.app",
+            "certificate_hash": "7bcd3df2ecdb3dbd4e2d8deb02254f9dffe15210"
+          }
+        },
+        {
+          "client_id": "394847830425-gr37s0i8ga4ho4c51i1t8bemieijcgri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1kBgEl-sVLG_w7UQek7HOA_hqGlXRCVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394847830425-fcpmrpp1sc03vrjdt63ibpi2j0sqi2rj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "394847830425-cnt05nusvspsccb2n7k7adhs7dmf94hu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cl.lomi.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

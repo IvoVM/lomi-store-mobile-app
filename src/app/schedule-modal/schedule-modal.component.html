@@ -1,0 +1,18 @@
+<div class="container p">
+  <h5 style="text-align: center;" class="dark-blue-lomi">¿Cuando despachamos?</h5>
+  <div class="option">
+    <ion-icon name="bicycle-outline"></ion-icon>
+    <div (click)="setNow()" class="dark-blue-lomi" style="display: flex;flex-direction: column;justify-content: center;">
+      <h6 style="margin-left:0.5em">Ahora</h6>
+      <p>Dentro de los proximos 60 minutos</p>
+    </div>
+  </div>
+  <div (click)="setTomorrow()" class="option montserrat">
+    <ion-icon name="calendar-clear-outline"></ion-icon>
+    <div class="dark-blue-lomi" style="display: flex;flex-direction: column;justify-content: center;">
+      <h6 style="margin-left:0.5em">Mañana</h6>
+      <p>A primera hora</p>
+    </div>
+  </div>
+  <ion-button (click)="dismiss()" class="linear-gradient-green-lomi">Cerrar</ion-button>
+</div>

@@ -1,0 +1,68 @@
+.active{
+    &-button{
+        width: 8em;
+        margin-left: 0.5em;
+    }
+    &-input{
+        width: 100%;
+    }
+}
+
+.normal{
+    &-button{
+        width: 100%;
+    }
+    &-input{
+        width: 0%;
+        opacity: 0;
+    }
+}
+
+ion-input{
+    margin: 0.5em 0;
+    border: 1px solid;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+}
+
+.input-button{
+    --border-radius: 10px;
+    border-radius: 10px;
+}
+
+::ng-deep .promotion-input{
+    & > *{
+        transition: 0.5s ease;
+        & > *{
+            transition: 0.5s ease;
+        }
+    }
+    &-icon{
+        width: 6em;
+    }
+    height: 3.5em;
+    ion-input{
+        --border-radius: 10px !important;
+    }
+}
+
+.error-text{
+    background-color: #ff7663;
+    color: white;
+    padding: 0.3em 0.5em;
+    border-radius: 10px;
+    margin-top:0.25em !important
+}
+
+.detail{
+    padding: 1em 0;
+}
+
+.icon{
+    ion-icon{
+        transition: 0.5s ease;
+        font-size: 1.8em;
+        padding: 0 !important;
+        border-radius: 50%;
+    }
+}

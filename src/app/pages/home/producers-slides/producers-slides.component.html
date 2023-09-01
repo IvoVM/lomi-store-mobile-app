@@ -1,0 +1,25 @@
+<app-title-link [title]="'Productores locales'" [link]="'/producers'"></app-title-link>
+<ion-grid class="title-container" [routerLink]="['/producers']" >
+  <ion-row>
+  
+    <ng-container>
+    </ng-container>
+  </ion-row>
+  <ion-row>
+    <ng-content></ng-content>
+  </ion-row>
+</ion-grid>
+
+<ng-container *ngIf="!producers">
+  <app-loader-spinner></app-loader-spinner>
+</ng-container>
+
+<div class="slides-x-scroll">
+  <div class="p-l slides-wrap slides-content-scroll p-b">
+    <div *ngFor="let producer of producers">
+      <app-producer-card [routerLink]="['/producers', producer.id]"
+                         [producer]="producer">
+      </app-producer-card>
+    </div>
+  </div>
+</div>

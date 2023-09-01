@@ -1,0 +1,85 @@
+ion-header {
+  min-height: 5.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shadow {
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.05);
+
+  ion-toolbar {
+      background-size: cover !important;
+  }
+
+}
+
+.title-header {
+  letter-spacing: -0.02em;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 22px;
+  padding-top: 0.3em;
+}
+
+.start-button {
+  padding-top: 0.3em;
+  font-size: 0.875em;
+
+  ion-icon {
+      color: #2d2d2d !important;
+  }
+}
+
+.map {
+  display: inline-block;
+  width: 100vw;
+  height: 370px;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-bar {
+  margin-top: 0.8em;
+  border: 2px solid #E5E5E5;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.form-container {
+  background: #FFFFFF;
+  border-radius: 25px 25px 0px 0px;
+  width: 100%;
+  position: absolute;
+  margin-top: -30px;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 1.1em;
+  color: #000000;
+  margin-bottom: 0px;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 0.95em;
+  color: #9F9F9F;
+  margin-top: 0px;
+}
+
+.title-input {
+  font-weight: 500;
+  font-size: 0.7em;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  color: #424962;
+}

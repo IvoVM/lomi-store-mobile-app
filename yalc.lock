@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "@spree/storefront-api-v2-sdk": {
+      "signature": "e3b83cfdd84f2c72f9cf335b3492120d",
+      "file": true
+    }
+  }
+}

@@ -1,0 +1,114 @@
+
+<ion-content fullscren>
+  <form [formGroup]="addressForm" (submit)="create()">
+    <ion-row>
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Dirección completa (Calle + Número)</ion-label>
+        <ion-input  [ngModel]="address ? address.attributes.address1 : ''" formControlName="address1" type="text" placeholder="Dirección completa"></ion-input>
+        <div class="error" *ngIf="addressForm.controls.address1.touched && addressForm.controls.address1.errors?.required">
+          La direccion es requerido
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Número de departamento/residencia</ion-label>
+        <ion-input  [ngModel]="address ? address.attributes.address2 : ''" formControlName="address2" type="text" placeholder="Número de departamento o residencia">
+        </ion-input>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">País</ion-label>
+        <ion-select placeholder="Seleccionar un país" formControlName="country_id" *ngIf="countries.length"
+          [ngModel]="address ? +address.attributes.country_id : ''">
+          <ion-select-option [value]="+country.id" *ngFor="let country of countries">{{country.attributes.name}}
+          </ion-select-option>
+        </ion-select>
+        <div class="error" *ngIf="addressForm.controls.country_id.touched && addressForm.controls.country_id.errors?.required">
+          El pais es requerido
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Region</ion-label>
+        <ion-select placeholder="Selecciona una región"
+                      [disabled]="!this.addressForm.controls.country_id.value"
+                      formControlName="state_id"
+                       *ngIf="states.length"
+                      [ngModel]="address ? +address.attributes.state_id : ''"
+                      type="text">
+            <ion-select-option [value]="+state.id" *ngFor="let state of filteredStates">
+              {{state.attributes.name}}
+            </ion-select-option>
+          </ion-select>
+        <div class="error" *ngIf="addressForm.controls.state_id.touched && addressForm.controls.state_id.errors?.required">
+          La region es requerido
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Ciudad</ion-label>
+        <ion-select placeholder="Selecciona una ciudad" [disabled]="!this.addressForm.controls.state_id.value"
+          formControlName="city" [ngModel]="address ? +address.attributes.city : ''"
+          type="text">
+          <ion-select-option [value]="stateToCity[this.addressForm.controls.state_id.value]">{{stateToCity[this.addressForm.controls.state_id.value]}}</ion-select-option>
+        </ion-select>
+        <div class="error" *ngIf="addressForm.controls.city.touched && addressForm.controls.city.errors?.required">
+          La ciudad es requerido
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Comuna</ion-label>
+        <ion-select placeholder="Selecciona una comuna" [disabled]="!this.addressForm.controls.state_id.value"
+          formControlName="county_id" *ngIf="counties.length" [ngModel]="address ? +address.attributes.county_id : ''"
+          type="text">
+          <ion-select-option [value]="+county.id" *ngFor="let county of filteredCounties">{{county.name}}</ion-select-option>
+        </ion-select>
+        <div class="error" *ngIf="addressForm.controls.county_id.touched && addressForm.controls.county_id.errors?.required">
+          La comuna es requerido
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Teléfono</ion-label>
+        <ion-input autofocus="true" formControlName="phone" [ngModel]="address ? address.attributes.phone : ''" type="number"
+          inputmode="numeric">
+          <ion-note style="margin-left: 0.5rem;" slot="start">+56 </ion-note> 
+        </ion-input>
+          <div class="error" *ngIf="addressForm.controls.phone.touched && addressForm.controls.phone.errors?.required">
+            El telefono es requerido
+          </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Nombre
+        </ion-label>
+        <ion-input autofocus="true" [ngModel]="address ? address.attributes.firstname : ''" formControlName="firstname" type="text" placeholder="Nombre"></ion-input>
+        <div class="error" *ngIf="addressForm.controls.firstname.touched && addressForm.controls.firstname.errors?.required">
+          El nombre es requerido
+        </div>
+
+      </ion-col>
+      <ion-col size="12">
+        <ion-label class="Montserrat title-input" position="stacked">Apellido
+        </ion-label>
+        <ion-input autofocus="true" [ngModel]="address ? address.attributes.lastname : ''" formControlName="lastname" type="text" placeholder="Apellido"></ion-input>
+        <div class="error" *ngIf="addressForm.controls.lastname.touched && addressForm.controls.lastname.errors?.required">
+          El Apellidos es requerido
+        </div>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <ion-grid style="padding: 0px">
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="create()" [disabled]="!addressForm.valid" style="--background:var(--ion-color-primary);--color: white; height: 2.5em;"
+          expand="block">
+          Guardar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

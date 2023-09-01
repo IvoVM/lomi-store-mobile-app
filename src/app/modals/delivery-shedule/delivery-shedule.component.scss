@@ -1,0 +1,82 @@
+.close-button {
+    position: absolute ;
+    top: -5px;
+    left: 80vw;
+
+    ion-icon {
+        color: #424962;
+    }
+}
+
+h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 21px;
+    letter-spacing: -0.02em;
+    margin-top: 20px;
+}
+
+.delivery-day {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5em;
+}
+
+.btn {
+    background: #FFFFFF;
+    border: 1px solid #F1F1F1 !important;
+    box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.03) !important;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.button-disabled{
+    box-shadow: none;
+    color: #B0B1B3;
+    opacity: 0.5 !important;
+}
+
+.btn-day {
+    width: 100%;
+}
+
+.delivery-hour {
+    margin-top: 1.5em;
+}
+
+.btn-hour {
+    span{
+        ion-icon {
+            margin-left: -0.8125em;
+            margin-right: 0.9em;
+        }
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.btn.select-delivery {
+    background: #E0FFF4;
+    border: 1px solid #00C686 !important;
+
+    span {
+        font-weight: 700 !important;
+        color: #00C686 !important;
+    }
+
+}
+
+.ellipse-icon {
+    border-radius: 100%; 
+    font-size: 0.8em;
+    margin: 0 10px;
+}
+
+.ellipse-icon-select {
+    border: 1px solid #B0B1B3;
+
+}

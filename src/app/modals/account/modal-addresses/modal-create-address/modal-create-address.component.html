@@ -1,0 +1,127 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Crear dirección</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" class="btn-dismiss"><ion-icon color="tertiary" name="chevron-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-padding-horizontal">
+      <form [formGroup]="addressForm" novalidate style="width: 100%">
+        <ion-col size="8">
+
+          <ion-input placeholder="Nombre *"
+                     class="ion-text-left ion-margin-bottom"
+                     formControlName="firstname"
+                     [ngModel]="address ? address.attributes.firstname : ''"
+                     type="text"></ion-input>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.firstname.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-input placeholder="Apellidos *"
+                     class="ion-text-left ion-margin-bottom"
+                     formControlName="lastname"
+                     [ngModel]="address ? address.attributes.lastname : ''"
+                     type="text"></ion-input>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.lastname.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-input placeholder="Telefono *"
+                     class="ion-text-left ion-margin-bottom"
+                     formControlName="phone"
+                     [ngModel]="address ? address.attributes.phone : ''"
+                     type="text"></ion-input>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.phone.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-select placeholder="Selecciona un país *"
+                      class="ion-text-left ion-margin-bottom"
+                      (ionChange)="onChange('country')"	
+                      formControlName="country_id"
+                      *ngIf="countries.length"
+                      [ngModel]="address ? +address.attributes.country_id : ''"
+                      type="text">
+            <ion-select-option [value]="+country.id"
+                               *ngFor="let country of countries">
+              {{country.attributes.name}}
+            </ion-select-option>
+          </ion-select>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.country_id.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-select placeholder="Selecciona una región *"
+                      (ionChange)="onChange('state')"	
+                      [disabled]="!this.addressForm.controls.country_id.value"
+                      class="ion-text-left ion-margin-bottom"
+                      formControlName="state_id"
+                       *ngIf="states.length"
+                      [ngModel]="address ? +address.attributes.state_id : ''"
+                      type="text">
+            <ion-select-option [value]="+state.id" *ngFor="let state of filteredStates">
+              {{state.attributes.name}}
+            </ion-select-option>
+          </ion-select>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.state_id.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-select
+                      [disabled]="!this.addressForm.controls.state_id.value"
+                      placeholder="Selecciona una ciudad *"
+                      class="ion-text-left ion-margin-bottom"
+                      formControlName="city"
+                      type="text">
+            <ion-select-option selected [value]="stateToCity[this.addressForm.controls.state_id.value]">{{stateToCity[this.addressForm.controls.state_id.value]}}</ion-select-option>
+
+          </ion-select>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.city.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-select placeholder="Selecciona una comuna"
+                     [disabled]="!this.addressForm.controls.state_id.value"
+                      class="ion-text-left ion-margin-bottom"
+                      formControlName="county_id"
+                      *ngIf="counties.length"
+                      [ngModel]="address ? +address.attributes.county_id : ''"
+                      type="text">
+          <ion-select-option [value]="+county.id" *ngFor="let county of filteredCounties">{{county.name}}</ion-select-option>
+          </ion-select>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.county_id.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-input placeholder="Dirección Completa (Calle + Número) *"
+                     class="ion-text-left ion-margin-bottom"
+                     formControlName="address1"
+                     [ngModel]="address ? address.attributes.address1 : ''"
+                     type="text"></ion-input>
+          <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.address1.errors?.required">
+            Este campo es requerido
+          </div>
+
+          <ion-input placeholder="Número Departamento o Residencia"
+                     class="ion-text-left ion-margin-bottom"
+                     formControlName="address2"
+                     [ngModel]="address ? address.attributes.address2 : ''"
+                     type="text"></ion-input>
+
+        </ion-col>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="create()" expand="block" [disabled]="loading">
+      <ng-container *ngIf="!loading">Guardar</ng-container>
+      <ng-container *ngIf="loading"><ion-spinner name="dots"></ion-spinner></ng-container>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

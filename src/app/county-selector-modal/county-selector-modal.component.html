@@ -1,0 +1,16 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="modalCtrl.dismiss()" class="btn-dismiss"><ion-icon color="tertiary" name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>   
+    <ion-title>Selecciona tu comuna</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar id="searchbar-county" #searchbar [ngModel]="filter" (keyup)="doFilter(searchbar)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-list *ngIf="counties.length > 1">
+    <ion-item (click)="selectCounty(county)" *ngFor="let county of filteredCounties" [id]="county.name.replace(' ','-')">{{county.name}}</ion-item>
+  </ion-list>
+</ion-content>

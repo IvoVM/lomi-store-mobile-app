@@ -1,0 +1,254 @@
+<ion-header translucent class="shadow">
+  <ion-toolbar>
+    <ion-title class="Montserrat dark-blue-lomi title-header">{{titlePage}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button class="start-button" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+
+  <ng-container *ngIf="previousPage === 'payment-methods'">
+    <div feature-flag name="kushki-credit-card" class="card-methods">
+      <ion-row (click)="goToCredito()">
+        <ion-col class="card-left" size="2">
+          <div class="icon-container">
+            <ion-icon name="card-outline"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col class="card-center" size="7">
+          <h1 class="Montserrat">Crédito</h1>
+          <h2 class="Montserrat">Registra una nueva tarjeta </h2>
+        </ion-col>
+        <ion-col class="card-right" size="3">
+          <ion-button class="add-button">
+            <span style="font-size: 13px;">Agregar</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div feature-flag name="kushki-debit-card" class="card-methods" style="margin-top: 1em;">
+      <ion-row (click)="registerDebitCard()">
+        <ion-col class="card-left" size="2">
+          <div class="icon-container">
+            <ion-icon name="card-outline"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col class="card-center" size="7">
+          <h1 class="Montserrat">Débito</h1>
+          <h2 class="Montserrat">Registra a través de Oneclick </h2>
+        </ion-col>
+        <ion-col class="card-right" size="3">
+          <ion-button class="add-button">
+            <span style="font-size: 13px;">Agregar</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="previousPage === 'checkout-kushki'">
+    <div feature-flag name="kushki-credit-card" class="card-methods">
+      <ion-grid>
+        <ion-row (click)="goToCredito()">
+          <ion-col class="card-left" size="2">
+            <div class="icon-container">
+              <ion-icon name="card-outline"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col class="card-center" size="7">
+            <h1 class="Montserrat">Crédito</h1>
+            <h2 class="Montserrat">Registra una nueva tarjeta </h2>
+          </ion-col>
+          <ion-col class="card-right" size="3">
+            <ion-button class="add-button">
+              <span style="font-size: 13px;">Agregar</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ng-container *ngFor="let c of card">
+          <div *ngIf="c.attributes.cc_type.toLowerCase() === 'credit' && !c.attributes.expired" class="divider"></div>
+          <ion-row *ngIf="c.attributes.cc_type.toLowerCase() === 'credit' && !c.attributes.expired" (click)="selectOption('credito/debito', c)">
+              <ion-col class="card-left" size="2">
+                <div class="icon-container" style="background-color: #E5E5E5;">
+                  <img style="width: 100%;" *ngIf="c.attributes.provider.toLowerCase() ==='visa'"
+                  src="../../../assets/images/visa_3.png">
+                  <img style="width: 17px; height: 11px;" *ngIf="c.attributes.provider.toLowerCase() === 'mastercard'"
+                  src="../../../assets/images/mastercard.png">
+                  <img style="width: 17px; height: 11px;" *ngIf="c.attributes.provider.toLowerCase() === 'redcompra'"
+                  src="../../../assets/images/redcompra.svg">
+                </div>
+              </ion-col>
+              <ion-col class="card-center" size="9">
+                <h1 class="Montserrat">Crédito {{c.attributes.provider}} **** {{c.attributes.last_digits}}</h1>
+              </ion-col>
+              <ion-col class="card-right" size="1">
+                <ion-button fill="clear">
+                  <ion-icon class="ellipse-icon" color="dark-lomi" slot="icon-only" name="ellipse-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+          </ion-row>
+        </ng-container>
+      </ion-grid>
+    </div>
+
+
+    <div feature-flag name="kushki-debit-card" class="card-methods" style="margin-top: 1em;">
+      <ion-grid>
+
+
+        <ion-row (click)="registerDebitCard()">
+          <ion-col class="card-left" size="2">
+            <div class="icon-container">
+              <ion-icon name="card-outline"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col class="card-center" size="7">
+            <h1 class="Montserrat">Débito</h1>
+            <h2 class="Montserrat">Registra a través de Oneclick </h2>
+          </ion-col>
+          <ion-col class="card-right" size="3">
+            <ion-button class="add-button">
+              <span style="font-size: 13px;">Agregar</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ng-container *ngFor="let c of card">
+          <div class="divider" *ngIf="c.attributes.cc_type.toLowerCase() === 'debit' && !c.attributes.expired"></div>
+          <ion-row *ngIf="c.attributes.cc_type.toLowerCase() === 'debit' && !c.attributes.expired" (click)="selectOption('credito/debito', c)">
+              <ion-col class="card-left" size="2">
+                <div class="icon-container" style="background-color: #E5E5E5;">
+                  <img style="width: 100%;" *ngIf="c.attributes.provider.toLowerCase() ==='visa'"
+                  src="../../../assets/images/visa_3.svg">
+                  <img style="width: 17px; height: 11px;" *ngIf="c.attributes.provider.toLowerCase() === 'mastercard'"
+                  src="../../../assets/images/mastercard.png">
+                  <img  *ngIf="c.attributes.provider.toLowerCase() === 'redcompra'"
+                  src="../../../assets/images/redcompra.svg">
+                </div>
+              </ion-col>
+              <ion-col class="card-center" size="9">
+                <h1 class="Montserrat">Débito {{c.attributes.provider}} **** {{c.attributes.last_digits}}</h1>
+              </ion-col>
+              <ion-col class="card-right" size="1">
+                <ion-button fill="clear">
+                  <ion-icon class="ellipse-icon" color="dark-lomi" slot="icon-only" name="ellipse-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+          </ion-row>
+        </ng-container>
+      </ion-grid>
+    </div>
+
+    <div feature-flag name="kushki-webpay" class="card-methods" style="margin-top: 1em;">
+      <ion-grid>
+        <ion-row (click)="selectOption('webpay', '')">
+          <ion-col class="card-left" size="2">
+            <div class="icon-container">
+              <img src="../../../assets/images/webpay_oneclick.svg">
+            </div>
+          </ion-col>
+          <ion-col class="card-center" size="9">
+            <h1 class="Montserrat">Débito / Crédito</h1>
+            <h2 class="Montserrat">Pago directo por Webpay</h2>
+          </ion-col>
+          <ion-col class="card-right" size="1">
+            <ion-button fill="clear">
+              <ion-icon color="dark-lomi" class="ellipse-icon" slot="icon-only" name="ellipse-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div [ngClass]="[containsAlcohol ? 'disable-method' : '']" class="card-methods" style="margin-top: 1em;">
+      <ion-grid>
+        <ion-row (click)="selectOption('sodexo', '')">
+          <ion-col class="card-left" size="2">
+            <div class="logo-container">
+              <img src="../../../assets/images/Sodexo_logo.svg" >
+            </div>
+          </ion-col>
+          <ion-col class="card-center" size="9">
+            <h1 class="Montserrat">Sodexo</h1>
+            <h2 class="Montserrat">Por contraseña</h2>
+          </ion-col>
+          <ion-col class="card-right" size="1">
+            <ion-button fill="clear">
+              <ion-icon class="ellipse-icon" [color]="containsAlcohol ? 'medium' : 'dark-lomi'" slot="icon-only" name="ellipse-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <p class="alcohol-sodexo" *ngIf="containsAlcohol">Compras con alcohol incluido no son permitidas por Sodexo.</p>
+
+    <div feature-flag name="mercadopago-payment" class="card-methods" style="margin-top: 1em;">
+      <ion-grid>
+        <ion-row (click)="selectOption('mercadopago', '')">
+          <ion-col class="card-left" size="2">
+            <div class="logo-container" style="overflow: hidden;">
+              <img src="../../../assets/images/mercadopago_logo.png" >
+            </div>
+          </ion-col>
+          <ion-col class="card-center" size="9">
+            <h1 class="Montserrat">Mercadopago</h1>
+            <h2 class="Montserrat">Tarjeta Crédito/Débito</h2>
+          </ion-col>
+          <ion-col class="card-right" size="1">
+            <ion-button fill="clear">
+              <ion-icon color="dark-lomi" class="ellipse-icon" slot="icon-only" name="ellipse-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div [ngClass]="edenredMinTotal < 1000 || containsAlcohol || hideEdenred ? 'disable-method' : ''" feature-flag name="edenred-payment" class="card-methods" style="margin-top: 1em;">
+      <ion-grid>
+        <ion-row (click)="selectOption('edenred', '')">
+          <ion-col class="card-left" size="2">
+            <div class="logo-container">
+              <img src="../../../assets/images/edenred_logo.png" >
+            </div>
+          </ion-col>
+          <ion-col class="card-center" size="9">
+            <h1 class="Montserrat">Ticket Restaurant Edenred</h1>
+            <h2 class="Montserrat">Pago con tus datos</h2>
+          </ion-col>
+          <ion-col class="card-right" size="1">
+            <ion-button fill="clear">
+              <ion-icon class="ellipse-icon" [color]="containsAlcohol ? 'medium' : 'dark-lomi'" slot="icon-only" name="ellipse-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <p class="alcohol-sodexo" *ngIf="hideEdenred || containsAlcohol || edenredMinTotal < 1000">Tienes algún producto no permitido por Edenred o la compra es inferior a 1.000</p>
+
+    <div *ngIf="subscribed" class="card-methods" style="margin-top: 1em;">
+      <ion-grid>
+          <ion-row (click)="selectOption('oldWebPay', '')">
+              <ion-col class="card-left" size="2">
+                <div class="logo-container">
+                  <img src="../../../assets/images/webpayPlus.png">
+                </div>
+              </ion-col>
+              <ion-col class="card-center" size="9">
+                <h1 class="Montserrat">{{subscriptionData.oneclick_card_type | titlecase}} {{subscriptionData.oneclick_card_number.slice(-8)}}</h1>
+              </ion-col>
+              <ion-col class="card-right" size="1">
+                <ion-button fill="clear">
+                  <ion-icon class="ellipse-icon" color="dark-lomi" slot="icon-only" name="ellipse-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+    </div>
+
+  </ng-container>
+
+</ion-content>

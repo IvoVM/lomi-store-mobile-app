@@ -1,0 +1,88 @@
+<ion-content>
+
+  <app-search-bar></app-search-bar>
+  <div style="margin-bottom: 2.5em;"></div>
+  <div class="ion-padding">
+
+    <ion-grid fixed style="padding: 0px !important;">
+      <ion-row>
+        <ion-col feature-flag name="discover-mix"  (click)="goToChild('lomibox')">
+          <div class="ellipse-1">
+            <p class="Montesrrat ion-text-center">LOMI-MIX</p>
+          </div>
+          <img src="../../../../assets/images/bag_1.svg" class="bag">
+        </ion-col>
+        <ion-col feature-flag name="discover-recipe"  (click)="goToChild('recepies')">
+          <p class="p-ellipse-2 Montesrrat ion-text-center">RECETAS</p>
+          <div class="ellipse-2">
+            <img src="../../../../assets/images/recepi.svg">
+          </div>
+        </ion-col>
+        <!-- <ion-col>
+          <div class="ellipse-1">
+            <p class="Montesrrat ion-text-center">PRODUC - <br>TORES</p>
+          </div>
+          <img src="../../../../assets/images/stars.svg" class="stars">
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+
+   
+    <ion-button feature-flag name="redirecto-to-refer" (click)="goToReferred()"  color="lightLomi" class="ion-margin-top" expand="block" shape="round">
+      <div class="flex-between">
+        <img src="../../../../assets/images/avocado_friends.svg">
+        <span>
+          Refiere a un amigo y gana $6.000!
+        </span>
+        <div style="display: flex; align-items: center;">
+          <ion-icon style="fill: #03c686;" name="caret-forward-outline"></ion-icon>
+        </div>
+      </div>
+    </ion-button>
+  </div>
+
+  <div *ngIf="showSkeleton">
+    <ion-skeleton-text animated style="height: 200px;  margin-left: 1em; border-radius: 20px 0 0 20px;">
+    </ion-skeleton-text>
+    <ion-skeleton-text animated style="height: 200px;  margin-right: 1em; border-radius: 0 20px 20px 0;">
+    </ion-skeleton-text>
+  </div>
+
+
+  <!-- [ngClass]="i%2 === 0 ? 'container-left': 'container-right'" -->
+  <div class="important-sales-container">
+    <h2 class="Monteserrat warn">Preferencias o restricciones alimenticias</h2>
+
+    <ng-container *ngFor="let filter of filterBy;let i = index">
+      <ng-container *ngIf="filter.products.length">
+        <div class="divider"></div>
+        <div class="important-sales-header">
+          <img style="margin-left: 1.1em; margin-right: 0.5em; max-width: 25px; max-height: 25px;"  [src]="filter.icon">
+          <p class="Montserrat ion-padding" style="font-size: 16px; color: #424962; font-weight: 600; margin-left: -1em;">
+            {{filter.name | titlecase}}</p>
+            <ion-button fill="clear" class="Montserrat discover-show" style="top: none;" (click)="searchAllPreferences(filter)"  >Ver todos
+            </ion-button>
+          </div>
+          
+          <div class="slide-scroll">
+            <div class="p-l montserrat product-slide-content">
+              <div *ngFor="let product of filter.products">
+                <app-product-card [product]="product" (click)="openProduct(product)"></app-product-card>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!existProducts && !showSkeleton">
+        <div class="ion-text-center" style="margin-top: 1em;">
+          <img src="../../../../assets/images/basket.svg" alt="basket"  width="150">
+          <h5>No hay preferencias alimenticias para esta tienda</h5>
+        </div>
+      </ng-container>
+    <div class="nav-space"></div>
+  </div>
+
+
+  <div class="nav-space"></div>
+  <div class="nav-space"></div>
+</ion-content>

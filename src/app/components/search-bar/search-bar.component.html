@@ -1,0 +1,32 @@
+<div
+  style="background-color: rgba(241, 241, 241, 0.6); width: 100%; position: fixed; z-index: 999999; backdrop-filter: blur(4.4px); -webkit-backdrop-filter: blur(4.4px);">
+  <ion-searchbar style="padding: 0 1.5em;" #q [autocorrect]="true" [autocomplete]="'on'" type="text"
+    (ionInput)="checkInput($event)" enterkeyhint="search" debounce="500" placeholder="Busca algo rico en lomi"
+    (ionChange)="getItems($event)" (ionClear)="clear(q)" (keypress)="search($event, q.value)"
+    (search)="search($event, q.value)" mode="ios">
+  </ion-searchbar>
+
+  <div class="search-discovery shadow"
+    *ngIf="searching && keyword && keyword.length >= 3 && !router.url.includes('search')">
+    <ng-container *ngIf="searching && items.length < 1">
+      <h3 class="p">No se han encontrado productos</h3>
+    </ng-container>
+
+    <ng-container *ngIf="keyword && searching">
+      <div class="p">
+      </div>
+    </ng-container>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of items" (click)="onSearch(item)">
+        <ion-avatar slot="start">
+          <img src="{{item.i}}">
+        </ion-avatar>
+        <ion-label>
+          <h3><b>{{item.n}}</b></h3>
+          <h3>{{item.p}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>

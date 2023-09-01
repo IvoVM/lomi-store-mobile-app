@@ -1,0 +1,57 @@
+<ng-container *ngIf="box">
+  <div class="inside-col" (click)="openBoxModal()">
+    <div >
+      <img *ngIf="!box.categoryImg" style="width: 100%;height: 100%;  border-radius: 0;" src="../../../../assets/images/lomibox/no_mix_img.svg">
+      <img *ngIf="box.categoryImg" style="width: 100%;height: 100%;  border-radius: 0;" [src]="box.categoryImg">
+      <!-- <ion-fab  class="fab-{{quantityInCart > 0 ? 'open' : 'close'}}">
+        <ion-toolbar color="white" style="padding: 0 !important;">
+          <ion-buttons slot="primary">
+            <ng-container *ngIf="quantityInCart > 0">
+              <ion-spinner *ngIf="removingItem && !hideAllLoading && !hideLoading" color="primary" name="crescent"></ion-spinner>
+              <ion-button *ngIf="!removingItem || (hideAllLoading || hideLoading)" color="primary" size="small" (click)="removeAllProducts()" [ngClass]="hideLoading && removingItem ? 'deactivated-opacity' : ''">
+                <ion-icon slot="icon-only" src="assets/icons/minus_trans.svg"></ion-icon>
+              </ion-button>
+              <ion-spinner *ngIf="(removingItem || addingItem) && (!hideAllLoading && !hideLoading)"  name="dots"></ion-spinner>
+              <ion-button *ngIf="!removingItem && !addingItem || (hideAllLoading || hideLoading)" size="small" disabled="true" class="add-button">
+                {{quantityInCart}}
+              </ion-button>
+            </ng-container>
+            <ion-spinner *ngIf="addingItem && !hideAllLoading && !hideLoading" color="primary" name="crescent"></ion-spinner>
+            <ion-button *ngIf="!addingItem || hideLoading || hideAllLoading" color="primary" size="small" (click)="addAllProducts()" class="add-button " [ngClass]="hideLoading && addingItem ? 'deactivated-opacity' : ''">
+              <ion-icon slot="icon-only" src="assets/icons/plus_trans.svg"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-fab> -->
+    </div>
+    <div class="body-card">
+      <p class="price Monteserrat">${{boxPrice | number}}</p>
+      <p class="title Monteserrat">{{box.title.length > 34 ? box.title.slice(0, 33)+'...': box.title}}
+      </p>
+      <br *ngIf="box.title.length < 20" style="margin-top: 0;">
+      <p class="Monteserrat option-text" style="margin-top: 0;">{{box.option_text}}</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <ul class="Monteserrat">
+        <ng-container *ngFor="let product of products; let i = index;">
+          <li *ngIf="i < 5">
+            {{product.attributes.name.length > 19 ? product.attributes.name.slice(0, 18)+'...' : product.attributes.name}}
+          </li>
+          <li *ngIf="i == 5 && box.products.length <= 6; break">
+            {{product.attributes.name.length > 19 ? product.attributes.name.slice(0, 18)+'...' : product.attributes.name}}
+          </li>
+          <li *ngIf="i == 5 && box.products.length > 6; break" class="more-products">
+            <span> {{box.products.length - i}} productos más</span>
+          </li>
+        </ng-container>
+
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
+<div *ngIf="!box" style="border-radius: 20px; height: 285px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.07);">
+  <ion-skeleton-text animated style="width: 100%;" *ngIf="false"></ion-skeleton-text>
+
+</div>

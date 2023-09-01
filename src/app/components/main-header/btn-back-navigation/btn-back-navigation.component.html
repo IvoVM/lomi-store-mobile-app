@@ -1,0 +1,7 @@
+<ion-button (click)="goBackLocation()" #content>
+  <ng-container *ngIf="router.url !== '/tabs/home'">
+    <ng-container *ngIf="product"><ion-icon name="chevron-back-outline"></ion-icon></ng-container>
+    <ion-icon name="chevron-back-outline" *ngIf="!product"></ion-icon>
+  </ng-container>
+</ion-button>
+

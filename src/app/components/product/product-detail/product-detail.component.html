@@ -1,0 +1,107 @@
+<ng-container *ngIf="!product">
+  <app-loader-spinner></app-loader-spinner>
+</ng-container>
+
+<ng-container *ngIf="product && producer && product.attributes">
+  <app-main-slides *ngIf="product"
+                   [product]="product"
+                   [imagesIds]="imagesIds">
+  </app-main-slides>
+  
+  <ion-grid *ngIf="product">
+    <ion-row>
+      <h4 class="price dcto-percentage" *ngIf="discountPresent">{{getDiscountPercentage()}}%</h4>
+      <ion-col size="12" class="ion-padding-horizontal">
+        <h3 class="montserrat dark-blue-lomi">{{product.attributes.name}}</h3>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row *ngIf="product">
+      <ion-col size="12" class="ion-padding-horizontal">
+        <div class="options" *ngIf="optionValues.length && activeVariant">
+          <ng-container *ngFor="let op of optionValues">
+            <div class="option-value" (click)="selectActiveVariant(op.variantId)"
+                 [ngClass]="{'active': activeVariant.id === op.variantId}">{{op.name}}</div>
+          </ng-container>
+        </div>
+        <h5 *ngIf="discountPresent">Antes: <span
+            class="dcto-price">{{ activeVariant.attributes.display_compare_at_price }}</span></h5>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row *ngIf="product.attributes.description">
+      <ion-col size="12" class="ion-padding-horizontal">
+        <p>Descripción</p>
+        <p class="description" [innerHTML] = "product.attributes.description">
+        </p>
+      </ion-col>
+    </ion-row>
+
+
+    
+  </ion-grid>
+  <div class="ion-text-center center-flex-align" *ngIf="!producer" style="min-height: 160px">
+    <app-loader-spinner></app-loader-spinner>
+  </div>
+  
+  <ion-row class="ion-justify-content-around border-top" *ngIf="producer && product">
+    <ion-col size="5" class="ion-padding-horizontal">
+      <app-producer-card [producer]="producer"></app-producer-card>
+    </ion-col>
+  </ion-row>
+  <app-title-link *ngIf="producer" [title]="'Más del productor'" [link]="'/producers/'+producer.id" ></app-title-link>
+  
+  <div class="ion-text-center center-flex-align" style="min-height: 200px" *ngIf="!producer || !product">
+    <app-loader-spinner></app-loader-spinner>
+  </div>
+  
+  <app-product-slides *ngIf="producer"
+                      [producer]="producer"
+                      [product]="product"></app-product-slides>
+  <div style="padding: 45px"></div>
+
+  <ion-footer *ngIf="product && product.attributes.individual_sale" class="custom-ion-footer ion-no-border">
+    <ion-button expand="block"
+                class = "addProductButton linear-gradient-green-lomi"
+                (click)="addItem()"
+                *ngIf="quantityInCart === 0"
+                [disabled]="loadingCart">
+      <ion-row>
+        <ion-col size="7" class="ion-text-left ion-align-items-center d-flex">
+          {{ product.attributes.display_price }}
+        </ion-col>
+        <ion-col size="5" class="ion-text-right">
+          <ng-container *ngIf="!loadingCart">
+            Agregar
+          </ng-container>
+          <ng-container *ngIf="loadingCart">
+            <ion-spinner name="crescent"></ion-spinner>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-button>
+
+    <ion-button class="linear-gradient-green-lomi" expand="block"
+                *ngIf="quantityInCart > 0"
+                [disabled]="loadingCart">
+      <ion-row>
+        <ion-col size="6" class="ion-text-left ion-align-items-center d-flex">
+          {{ product.attributes.display_price }}
+        </ion-col>
+        <ion-col size="2" class="ion-text-right" (click)="removeItem()" *ngIf="!loadingCart">
+          <ion-icon name="remove-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="2" class="ion-text-right" *ngIf="!loadingCart">
+          {{quantityInCart}}
+        </ion-col>
+        <ion-col size="2" class="ion-text-right" (click)="addItem()" *ngIf="!loadingCart">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right" *ngIf="loadingCart">
+          <ion-spinner name="crescent"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </ion-button>
+  
+  </ion-footer>
+</ng-container>

@@ -1,0 +1,28 @@
+<ion-header translucent class="shadow">
+  <ion-toolbar>
+    <ion-title class="Montserrat dark-blue-lomi title-header">{{titlePage}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button class="start-button" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="visibleIcon" class="trash-button" slot="end">
+      <ion-button class="header-button" >
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscren class="ion-padding">
+  <ng-container *ngIf="!googlePlace">
+    <app-address-form></app-address-form>
+  </ng-container>
+  <ng-container *ngIf="googlePlace">
+    <app-google-place [oldAddress]="address ?? ''"></app-google-place>
+  </ng-container>
+
+
+
+</ion-content>

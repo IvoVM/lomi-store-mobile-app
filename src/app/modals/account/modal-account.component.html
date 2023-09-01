@@ -1,0 +1,53 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Cuenta</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" class="btn-dismiss"><ion-icon color="tertiary" name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="this.user?.data" class="account-description">
+    <div class="leafs">
+      <img src="assets/images/leafs.svg">
+    </div>
+    <div>
+      <h2 class="montserrat color-primary" color="primary">Hola {{this.user.data.attributes.email.length >= 31 ? this.user.data.attributes.email.slice(0,28)+'...' : this.user.data.attributes.email}}</h2>
+      <h6 class="montserrat">¡Que bueno que estes aquí! <span class="color-primary">#ActitudLocal</span></h6>
+    </div>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.PAYMENTS)">Medios de pago</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.ADDRESSES)">Mis direcciones</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.ORDERS)">Mis Pedidos</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.MY_ACCOUNT)">Cambiar contraseña</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.FAQS)">Mis FAQ's</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.TERMS)">Términos y condiciones</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onSelectedModalOpen(ModalTarget.SHIPMENT_AVAIBILITY)">Rango de entrega</ion-label>
+    </ion-item>
+    <ion-item (click)="sendWhatsapp()">
+      <ion-icon slot="end" name="chatbubble-ellipses-outline"></ion-icon>
+      <ion-label>
+        ¿Necesitas ayuda? ¡Te escuchamos!
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="onLogout()">Cerrar sesión</ion-label>
+    </ion-item>
+  </ion-list>
+  <p class="version-display" style="font-size: 12px">    V{{appVersionCode}}  </p>
+</ion-content>

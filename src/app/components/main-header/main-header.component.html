@@ -1,0 +1,142 @@
+<ion-header *ngIf="activeHeader" [style.background]="this.router.url.includes('taxon')? taxonBanner : 'white'" class="p-l p-r {{taxonBanner && !router.url.includes('checkout')? 'taxon-banner-container' : ''}} shadow">
+  <h3 *ngIf="taxonBanner && !searchBarOpened && title "  style="position:absolute" (click)="goBack()" class="vulf-sans taxon-tittle"  >{{title}}</h3>
+ 
+  <ng-container *ngIf="taxonBanner && !this.router.url.includes('checkout')">
+    <ion-toolbar *ngIf="searchBarOpened">
+      <div  class="search" *ngIf="searchOpen && !searchInsideService">
+        <ion-icon (click)="openSearch()" name="chevron-back-outline"></ion-icon>
+        <ion-searchbar
+            #q
+            [autocorrect]="true"
+            [animated]="false"
+            [autocomplete]="'on'"
+            type="text"
+            (ionInput)="checkInput($event)"
+            enterkeyhint="search"
+            debounce="500"
+            placeholder="Busca algo rico en lomi"
+            (ionChange)="getItems($event)"
+            (ionClear)="cleanSearch(q)"
+            (keypress)="search($event, q.value)"
+            (search)="search($event, q.value)"
+            showClearButton="never"
+            cancelButtonText="Limpiar"
+            color="black"
+        >
+  
+        </ion-searchbar>
+        <!-- <p class="limpiar" *ngIf="searching && keyword.length" (click)="cleanSearch(q)">Limpiar</p> -->
+      </div>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="!searchBarOpened">
+      <div class="taxon-banner" >
+        <ng-container >
+          <div class="searcher-container">
+          </div>
+          <div class="clickleable" (click)="goBack()">
+            <ion-icon *ngIf="!searchBarOpened" class="back-button dark-gray-lomi"  name="chevron-back-outline"></ion-icon>
+          </div>
+        </ng-container>
+      </div>
+      
+      <ion-buttons slot="end" *ngIf="!searchBarOpened">
+        <app-searcher [type]="'button'">
+          <ion-button id="#cart-button" (click)="openCart()" class="cart-button header-button">
+            <ng-container *ngIf="loadingCart">
+              <ion-spinner name="dots"></ion-spinner>
+            </ng-container>
+            <ng-container *ngIf="!loadingCart && !searchBarOpened">
+              <ion-badge class="cart-amount">{{amount}}</ion-badge>
+              <ion-icon slot="icon-only" name="cart-outline" md="cart"></ion-icon>
+            </ng-container>
+          </ion-button>
+        </app-searcher>
+
+        
+        
+      </ion-buttons>
+    </ion-toolbar>
+  </ng-container>
+  <ion-toolbar *ngIf="!taxonBanner || this.router.url.includes('checkout')  ">
+    
+
+    <ng-container *ngIf="!searchOpen">
+      <ion-buttons *ngIf="!(['/tabs/home','/tabs/products','/tabs/sales', '/tabs/discover'].includes(router.url)) " slot="start">
+        <app-btn-back-navigation ></app-btn-back-navigation>
+      </ion-buttons>
+      <ion-buttons slot="end"  *ngIf="hiddenElements()">  
+        <ion-button *ngIf="router.url == '/tabs/products' || router.url == '/tabs/sales'" (click)="openSearch()" class="header-button">
+          <ion-icon slot="icon-only" name="search-outline" md="search"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="router.url.includes('cart')" (click)="emptyCart()" class="header-button">
+          <ion-icon slot="icon-only" name="trash-outline" md="search"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="!router.url.includes('greetings') && !router.url.includes('orders') && !router.url.includes('checkout') && !router.url.includes('cart')" id="cart-button" (click)="openCart()" class="header-button">
+          <ng-container *ngIf="loadingCart">
+            <ion-spinner name="dots"></ion-spinner>
+          </ng-container>
+          <ng-container  *ngIf="!loadingCart">
+            <ion-badge class="cart-button cart-amount">{{amount}}</ion-badge>
+            <ion-icon slot="icon-only" name="cart-outline" md="cart"></ion-icon>
+          </ng-container>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="title dark-blue-lomi">
+        <!-- <ion-icon *ngIf="resolveTitle() == 'Ofertas'" src="assets/icons/fire.svg"></ion-icon> -->
+        <span style="text-overflow: ellipsis;overflow: auto;;" [innerHTML]="title"></span>
+        <!-- <ion-icon *ngIf="resolveTitle() == 'Ofertas'" src="assets/icons/fire.svg"></ion-icon> -->
+      </ion-title>
+
+  
+      <app-shipping-selector *ngIf="router.url.includes('/tabs/home') "></app-shipping-selector>
+    </ng-container>
+   
+    <div class="search" *ngIf="searchOpen && !taxonBanner">
+      <ion-icon (click)="openSearch()" name="chevron-back-outline"></ion-icon>
+      <ion-searchbar
+          #q
+          [autocorrect]="true"
+          [animated]="false"
+          [autocomplete]="'on'"
+          type="text"
+          (ionInput)="checkInput($event)"
+          enterkeyhint="search"
+          debounce="500"
+          placeholder="Busca algo rico en lomi"
+          (ionChange)="getItems($event)"
+          (ionClear)="cleanSearch(q)"
+          (keypress)="search($event, q.value)"
+          (search)="search($event, q.value)"
+          showClearButton="never"
+          cancelButtonText="Limpiar"
+          color="black"
+      >
+
+      </ion-searchbar>
+      <!-- <p class="limpiar" *ngIf="searching" (click)="cleanSearch(q)">Limpiar</p> -->
+    </div>
+  </ion-toolbar>
+</ion-header>
+<div class="search-discovery shadow" *ngIf="searchOpen && keyword && keyword.length >= 3 && !router.url.includes('search')">
+  <ng-container *ngIf="!searching && !items.length">
+    <h3 class="p" >No se han encontrado productos</h3>
+  </ng-container>
+  
+  <ng-container *ngIf="keyword && searching">
+    <div class="p">
+    </div>
+  </ng-container>
+
+  <ion-list>
+    <ion-item button *ngFor="let item of items" (click)="onSearch(item)">
+      <ion-avatar slot="start">
+        <img src="{{item.i}}">
+      </ion-avatar>
+      <ion-label>
+        <h3><b>{{item.n}}</b></h3>
+        <h3>{{item.p}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+

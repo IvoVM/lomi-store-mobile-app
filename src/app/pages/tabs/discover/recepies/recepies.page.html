@@ -1,0 +1,81 @@
+<ion-content>
+  <div class="ion-padding">
+
+    <ion-searchbar placeholder="¿Qué te gustaría cocinar hoy?" (ionChange)="filterItems($event)"></ion-searchbar>
+
+    <div style="display: flex; width: 100%; align-items: center;">
+      <h2 class="Monteserrat">Las favoritas de la semana</h2>
+      <img src="assets/images/corazon_1.png" style="width: 18px; margin-left: 3px; margin-bottom: -5px;">
+    </div>
+
+    <app-lomi-favorites-recipes [titleLink]="false"></app-lomi-favorites-recipes>
+
+
+    <div class="m-t">
+      <ion-button (click)="pickRandomRecepy()" expand="block" color="darkbluelomi" shape="round">
+        <ion-icon slot="start" src="../../../../../assets/icons/green_dices.svg"
+          style="font-size: 2em; margin-right: 0.5em;"></ion-icon>
+        <span style="color: #BAF1DE;">
+          Elegir receta al azar
+        </span>
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="container-list-recepy ion-padding">
+    <div class="scroll-nav-container" >
+      <div class="p-l p-r scroll-nav">
+        <div class="button" (click)="selectTab('todos')" [ngClass]="selectedTab == 'todos' ? 'active': ''">
+          Todas nuestras recetas
+        </div>
+        <div class="button" (click)="selectTab('dulce')" [ngClass]="selectedTab == 'dulce' ? 'active': ''">
+          Dulces
+        </div>
+        <div class="button" (click)="selectTab('saladas')" [ngClass]="selectedTab == 'saladas' ? 'active': ''">
+          Saladas
+        </div>
+        <ng-container>
+        
+      </ng-container>
+      </div>
+    </div>
+    <ng-container *ngIf="!recepies.length">
+      <ion-skeleton-text animated style="width: 100%; height: 110px; padding: 1em; border-radius: 20px;">
+      </ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%; height: 110px; padding: 1em; border-radius: 20px;">
+      </ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%; height: 110px; padding: 1em; border-radius: 20px;">
+      </ion-skeleton-text>
+    </ng-container>
+    <ng-container *ngFor="let recepy of recepies |filterRecipe:filterValue|categoryRecipe:selectedTab">
+
+      <ion-grid fixed style="width: 100%;">
+        <ion-row (click)="openRecepyModal(recepy)">
+          <ion-col size="3">
+            <img [src]="recepy.images[0]" style="height: 80px; width: 80px; border-radius: 20px; object-fit: cover;">
+          </ion-col>
+          <ion-col>
+            <p class="Monteserrat" style="color: #424962; font-weight: 800;">{{recepy.title.length > 47 ? recepy.title.slice(0, 57)+'...' : recepy.title}}</p>
+            <br *ngIf="recepy.title.length < 30" style="margin-top: 0 !important;">
+            <div style="display: flex; flex-wrap: wrap;">
+              <p class="Monteserrat chip chip-1">
+                {{recepy.ingredients.length}} ingredientes
+              </p>
+              <p class="Monteserrat chip chip-1">
+                {{recepy.quantity}} porciones
+              </p>
+              <p class="Monteserrat chip chip-2" style="background-color: #F6F6F6;">
+                <ion-icon name="time"></ion-icon>{{recepy.time}} min
+              </p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+    <div class="nav-space"></div>
+    <div class="nav-space"></div>
+  </div>
+
+
+
+</ion-content>

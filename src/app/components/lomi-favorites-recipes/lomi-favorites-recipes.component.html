@@ -1,0 +1,32 @@
+<ion-skeleton-text *ngIf="!recepies.length" animated
+style="width: 90%; height: 150px; padding: 10px; border-radius: 25px; margin-left: 20px;"></ion-skeleton-text>
+<app-title-link  *ngIf="titleLink && recepiesHeader.length" [title]="title" [link]="'/tabs/discover/recepies'"></app-title-link>
+<div class="slides-x-scroll">
+<div class="slides-content-scroll" style="padding: 0 10px; width: 90%;">
+  <ng-container *ngFor="let recepy of recepiesHeader">
+    <div class="img-container" (click)="openRecepyModal(recepy)">
+      <img [src]="recepy.images[0]">
+      <div class="bottom-gradient"></div>
+      <div class="inner-img top-1">
+        <div style="display:  flex;">
+          <p class="chip chip-1 Monteserrat">
+            {{recepy.ingredients.length}} ingredientes
+          </p>
+          <p class="chip chip-1 Monteserrat">
+            {{recepy.quantity}} porciones
+          </p>
+        </div>
+        <div class="inner-img top-2">
+          <p class="chip chip-2 Monteserrat">
+            <ion-icon name="time"></ion-icon>{{recepy.time}} min
+          </p>
+        </div>
+      </div>
+      
+      <div class="inner-img bottom-1">
+        <p class="Monteserrat">{{recepy.title}}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+</div>

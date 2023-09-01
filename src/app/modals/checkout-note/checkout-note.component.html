@@ -1,0 +1,15 @@
+<div >
+  <h1>Nota</h1>
+  <ion-item>
+    <ion-textarea 
+      rows="4" 
+      [value]="nota" 
+      placeholder="Alguna nota, aclaración"  
+      style="height: 6.5em;" 
+      (ionChange)="setInstructions($event)">
+    </ion-textarea>
+  </ion-item>
+  <ion-button (click)="dismiss()" color="dark-lomi" expand="block" shape="round">
+    Listo
+  </ion-button>
+</div>

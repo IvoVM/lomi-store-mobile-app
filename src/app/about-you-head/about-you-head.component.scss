@@ -1,0 +1,63 @@
+.ellipse {
+    position: fixed;
+    width: 709.43px;
+    height: 309px;
+    left: -47%;
+    top: -50.07px;
+    background: #E0FFF4;
+    transform: rotate(1.12deg);
+    border-radius: 50%;
+    z-index: -1;
+
+}
+
+img {
+    position: fixed;
+    right: 0.3%;
+    top: 1.5%;
+}
+h1 {
+    position: absolute;
+    width: 296px;
+    height: 83px;
+    left: 24px;
+    top: 67px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 26px;
+    letter-spacing: -0.408px;
+    color: #424962;
+}
+
+h2 {
+    position: fixed;
+    width: 90%;
+    height: 30px;
+    left: 26px;
+    top: 152px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 30px;
+    letter-spacing: -0.408px;
+    color: #00C686;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-icon {
+        font-size: 20px;
+    }
+}
+
+.btn-dismiss {
+    position: absolute;
+    bottom: -60px;
+}
+
+ion-icon {
+    color: #424962;
+}

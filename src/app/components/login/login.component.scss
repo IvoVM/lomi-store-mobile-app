@@ -1,0 +1,53 @@
+ion-item {
+    --padding-start: 0px !important;
+    --inner-padding-end: 0px !important;
+}
+ion-label {
+    font-size: 12px;
+    color: #424962;
+}
+ion-input {
+    --margin-bottom: 10px !important;
+    margin-bottom: 10px !important;
+}
+h6 {
+    color: #424962;
+}
+.subtitle {
+    color: #424962;
+    font-size: 22px;
+    font-weight: 800;
+}
+.register {
+    font-size: 16px;
+    text-decoration: underline;
+}
+.forgotPassword {
+    text-align: end;
+    font-size: 12px;
+    text-decoration: underline;
+}
+.googleLogo {
+    font-size: 230px;
+    height: 15px;
+    width: auto;
+    margin-right: 12px;
+}
+.googleButton {
+    --border-color: white;
+    --opacity: 1;
+    --box-shadow: 0px 0px 8px #F1F1F1;
+}
+.question {
+    font-size: 14px;
+}
+.or {
+    --margin-top: 0px;
+    --margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.apple-button{
+    --background: black
+}

@@ -1,0 +1,10 @@
+.background-blur-container {
+  overflow: hidden;
+  background: #e9e9e9;
+  position: absolute;
+  top: 0;
+  height: 200px;
+  filter: blur(1.5rem);
+  min-width: 1000%;
+  left: -20%;
+}

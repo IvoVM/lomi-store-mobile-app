@@ -1,0 +1,67 @@
+<ion-content>
+  <ng-container *ngIf="!cart">
+    <app-loader-spinner></app-loader-spinner>
+  </ng-container>
+  <ng-container *ngIf="cartItems.length && cart">
+    <ion-row class="ion-padding summary-order">
+      <ion-col size="12">
+        <h4><b>
+          <ion-icon *ngIf="cart.data.attributes.state == 'complete'" name="checkmark-circle" class="check-icon"></ion-icon>
+          {{getOrderState(cart.data.attributes.state)}}
+        </b></h4>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding summary-order">
+      <ion-col size="12">
+        <h5 style="margin: 0"><b>Resumen</b></h5>
+        <h6><b>Usuario:</b> {{user.attributes.email}}</h6>
+        <h6><b>Dirección:</b> {{address.attributes.address1}}, {{address.attributes.city}}</h6>
+        <h6 *ngIf="cart.miles_latam">Con tu pedido haz acumulado <b>{{cart.miles_latam ? cart.miles_latam : '0'}}</b> millas latam</h6>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding summary-order">
+      <ion-col size="6">
+        <h6 class="ion-no-margin">Subtotal</h6>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <h6 class="ion-no-margin">{{ cart.data.attributes.display_item_total }}</h6>
+      </ion-col>
+      <ion-col size="6">
+        <h6>Promoción</h6>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <h6>{{ cart.data.attributes.display_adjustment_total}}</h6>
+      </ion-col>
+      <ion-col *ngIf="shipment" size="6">
+        <h6>Envío</h6>
+      </ion-col>
+      <ion-col *ngIf="shipment" size="6" class="ion-text-right">
+        <h6>${{ shipment.final_price }}</h6>
+      </ion-col>
+      <ion-col size="6">
+        <h4><b>Total</b></h4>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <h4><b>{{ cart.data.attributes.display_total }}</b></h4>
+      </ion-col>
+    </ion-row>
+    <app-cart-products *ngFor="let item of cartItems" [item]="item" [cartStatus]="cart"></app-cart-products>
+  </ng-container>
+  <div class="nav-space"></div>
+  <div class="nav-space"></div>
+</ion-content>
+
+<ion-footer *ngIf="!hideRepeatOrder" feature-flag [variant]="true" name="repeat-order" class="custom-ion-footer">
+    <ion-button [disabled]="loadingCart" (click)="repeatOrder()" expand="block" shape="round">
+      <span *ngIf="!loadingCart">Repetir Pedido</span>
+      <div *ngIf="loadingCart" class="flex-between">
+        <span>Agregando Productos</span>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <ion-spinner [color]="'white'" name="crescent" class="big"></ion-spinner>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-button>
+</ion-footer>
+

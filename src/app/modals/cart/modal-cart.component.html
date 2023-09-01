@@ -1,0 +1,242 @@
+<!--
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title class="montserrat blue-lomi">Mi carrito</ion-title>
+    <ion-buttons slot="start">
+      <ion-button style="color:black;" (click)="dismiss()" class="btn-dismiss">
+        <ion-icon style="color:black;margin-bottom:0.2em;"  name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="!cartEmpty()" slot="end">
+      <ion-button (click)="emptyCart()"  class="header-button">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+-->
+
+<ng-container *ngIf="(!this.cart || loading) && !loadingButton && !cartEmpty()">
+  <app-loader-spinner style="height: 100vh;"></app-loader-spinner>
+</ng-container>
+
+<ion-content [class.notEmptyCart]="!cartEmpty()">
+  <ng-container *ngIf="cartEmpty()">
+    <ion-row class="ion-padding">
+      <ion-col size="12" class="ion-text-center">
+        <ng-lottie class="lottie" [options]="options"></ng-lottie>
+        <h5>Tu carrito está vacío</h5>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="!cartEmpty() && !loading ">
+    <div class="items-titles" *ngIf="shipmentInfo?.schedule">
+      <ion-label *ngIf="shipmentInfo.schedule.day === 'Hoy' && shipmentInfo.schedule.hour.id == 0" class="Montserrat delivery-select"><img src="../../../assets/images/lightning_fill.svg"> Hoy - <span>Inmediata, en la proxima hora</span></ion-label>
+      <ion-label *ngIf="shipmentInfo.schedule.day === 'Hoy' && shipmentInfo.schedule.hour.id != 0" class="Montserrat delivery-select">{{shipmentInfo.schedule.day}} - <span>{{shipmentInfo.schedule.hour.blok}}</span></ion-label>
+      <ion-label *ngIf="shipmentInfo.schedule.day === 'Mañana'" class="Montserrat delivery-select">{{shipmentInfo.schedule.day}} - <span>{{shipmentInfo.schedule.hour.blok}}</span></ion-label>
+      <ion-label *ngIf="!shipmentInfo.schedule.day" class="Montserrat delivery-select"><span>Próximo día hábil</span></ion-label>
+      <ion-icon name="close" (click)="dismiss()"></ion-icon>
+    </div>
+    <div class="coupon-container" *ngIf="false">
+      <div class="promotion-cart-input">
+        <h6>INGRESA TU CÓDIGO PROMOCIONAL</h6>
+        <div style="display: flex">
+          <ion-input class="input-code"
+                     [(ngModel)]="promotionInfo ? promotionInfo.code : checkout.promotionInput"></ion-input>
+          <div *ngIf="!promotionInfo" (click)="cartService.applyCouponCode(checkout.promotionInput)"
+               class="bg-primary btn-code">
+            <p class="p-r p-l" *ngIf="!updatingOrder">AGREGAR DCTO</p>
+            <p class="p-r p-l" style="margin: 9px;" *ngIf="updatingOrder"><ion-spinner [color]="'white'" name="crescent"></ion-spinner></p>
+          </div>
+          <div *ngIf="promotionInfo" (click)="cartService.removeCouponCode(checkout.promotionInput)"
+               class="bg-danger btn-code">
+            <p class="p-r p-l" *ngIf="!updatingOrder">QUITAR DCTO</p>
+            <p class="p-r p-l" style="margin: 9px;" *ngIf="updatingOrder"><ion-spinner [color]="'white'" name="crescent"></ion-spinner></p>
+          </div>
+        </div>
+        <div *ngIf="promotionInfo">
+          <p>Promoción activada : <b class="color-primary">{{promotionInfo.name}}</b></p>
+          <p *ngIf="!loadingPromotion">Descuento : <b class="color-primary">${{promotionInfo.amount}}</b></p>
+        </div>
+      </div>
+    </div>
+    <ion-list style="padding-top:8px" *ngIf="cartItems.length">
+      <app-cart-products [disabled]="lineItems ? true : false" (noStockEvent)="disableCheckout($event)" *ngFor="let item of cartItems" [item]="item" [product]="getLineItemProduct(item)" [cartContext]="true" [loadingButton]="loadingButton"></app-cart-products>
+    </ion-list>
+
+    <!--
+    <ng-container *ngIf="!loading">
+      <ion-row class="ion-padding">
+        <ion-col size="12">
+
+          <div class="accordion-item">
+            <ion-button start color="primary" class="button-code" (click)="expandItem('promotion')" expand="block"
+              fill="{{expanded == 'promotion' || promotion? 'solid' : 'outline'}}">Código
+              promocional
+              <ion-icon name="add-circle-outline" *ngIf="!promotion" class="ion-padding-start close"></ion-icon>
+            </ion-button>
+            <div class="ion-padding-bottom" *ngIf="promotion">
+              <h6 class="promo-text color-primary" (click)="removeCouponCode()">
+                Eliminar código activo <b>{{promotion.attributes.name}}</b>
+                <ion-icon name="close"></ion-icon>
+              </h6>
+            </div>
+
+            <div class="accordion-item-content">
+              <app-accordion-list expandHeight="auto" [expanded]="expanded">
+                <ion-grid class="ion-no-padding">
+                  <ion-row>
+                    <ion-col size="12" class="ion-no-padding">
+                      <form *ngIf="expanded == 'promotion'" [formGroup]="discountForm" (submit)="applyCouponCode()"
+                        novalidate style="width: 100%">
+                        <ion-input *ngIf="!promotion" placeholder="Ingresa un código" class="ion-text-left ion-margin-vertical"
+                          [ngModel]="promotion ? promotion.attributes.name : ''"
+                          formControlName="coupon_code" type="text"></ion-input>
+                        
+                        <div class="error ion-padding-bottom"
+                          *ngIf="submitted && errorCtr.coupon_code.errors?.required">
+                          Este campo es requerido
+                        </div>
+                        <div class="error ion-padding-bottom" *ngIf="discountError">
+                          {{discountError}}
+                        </div>
+                        <ion-button style="--background:var(--ion-color-primary);--color: white" class="ion-no-padding"
+                          type="submit" *ngIf="!promotion" expand="block">Agregar
+                        </ion-button>
+                      </form>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </app-accordion-list>
+            </div>
+            
+            <ion-button class="button-code" (click)="expandItem('latam')" expand="block" color="tertiary"
+              fill="{{expanded == 'latam' || latamCode ? 'solid' : 'outline'}}">
+              Ingresa tu código <img class="latam" src="assets/images/latam_pass.png">
+              <ion-icon name="add-circle-outline" class="ion-padding-start close"></ion-icon>
+            </ion-button>
+            <div class="ion-padding-bottom" *ngIf="latamCode">
+              <h6 color="tertiary" class="promo-text blue-lomi" (click)="setLatamCode(null)">
+                Eliminar código activo <b>{{latamCode}}</b>
+                <ion-icon *ngIf="!latamCode" name="close"></ion-icon>
+              </h6>
+            </div>
+
+            <div class="accordion-item-content">
+              <app-accordion-list expandHeight="auto" [expanded]="expanded">
+                <ion-grid class="ion-no-padding">
+                  <ion-row>
+                    <ion-col size="12" class="ion-no-padding">
+                      
+
+                      <form *ngIf="expanded == 'latam' && !latamCode" [formGroup]="latamForm" (submit)="setLatamCode()"
+                        novalidate style="width: 100%">
+                        <ion-input placeholder="Ingresa tu ID Latam Pass" class="ion-text-left ion-margin-vertical"
+                          [ngModel]="latamCode ? latamCode : ''" [disabled]="latamCode" formControlName="latam_code"
+                          type="text"></ion-input>
+                        <div class="error ion-padding-bottom" *ngIf="submitted && errorCtr.latam_code.errors?.required">
+                          Este campo es requerido
+                        </div>
+                        <ion-button color="tertiary" class="ion-no-padding" type="submit" *ngIf="!latamCode"
+                          expand="block">Agregar
+                        </ion-button>
+                      </form>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </app-accordion-list>
+            </div>
+          </div>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="false" class="ion-padding">
+        <ion-col size="6">
+          <h6 class="ion-no-margin">Subtotal</h6>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <h6 class="ion-no-margin">{{ cart.data.attributes.display_item_total }}</h6>
+        </ion-col>
+        <ng-container *ngFor="let error of deliveryErrors">
+          <ion-col size="12">
+            <h6  style="text-align:center" class="orange-lomi ion-no-margin">{{error}}</h6>
+          </ion-col>
+        </ng-container>
+        <ng-container *ngIf="!deliveryErrors.length && shipment && shipment.delivery">
+          <ng-container>
+            <ion-col *ngIf="cart.data.attributes.display_ship_total" size="6">
+              <h6 class="ion-no-margin">Costo de envío</h6>
+            </ion-col>
+            <ion-col *ngIf="cart.data.attributes.display_ship_total" size="6" class="ion-text-right">
+              <h6 class="ion-no-margin" *ngIf="cart.data.attributes.state == 'delivery'">{{ cart.data.attributes.display_ship_total }}</h6>
+            </ion-col>
+          </ng-container>
+          <ng-container *ngFor="let promo of shipment.promotions">
+            <ion-col size="6">
+              <h6>{{promo.attributes.name}}</h6>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <h6>{{ promo.attributes.display_amount }}</h6>
+            </ion-col>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngFor="let promo of promotions">
+          <ion-col *ngIf="promo.attributes.code" size="6">
+            <h6>{{promo.attributes.name}}</h6>
+          </ion-col>
+          <ion-col *ngIf="promo.attributes.code" size="6" class="ion-text-right">
+            <h6>{{ promo.attributes.display_amount }}</h6>
+          </ion-col>
+        </ng-container>
+        <ion-col size="6">
+          <h4><b>Total</b></h4>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <h4><b>{{ cart.data.attributes.display_total }}</b></h4>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  -->
+</ng-container>
+<div class="nav-space"></div>
+<div class="nav-space"></div>
+<div class="nav-space"></div>
+<div class="nav-space"></div>
+<div class="nav-space"></div>
+
+</ion-content>
+
+<ion-footer class="custom-ion-footer {{translatedButton ? 'taller-footer' : ''}} gray-bg" *ngIf="cart && !cartEmpty() && !lineItems">
+  <div style="margin-left:-16px">
+    <div>
+      <app-flexible-promotions-bar (promotionsToReach)="translatePromoButton($event)" [autohide]="false"></app-flexible-promotions-bar>
+    </div>
+  </div>
+  <ion-button class="flex-between squared-border {{addressService.shipmentType == 'delivery' ? 'translated' : ''}} {{promotion ? 'promo-button-activated' : ''}} m-b" expand="block" (click)="promotionInfo ? cartService.removeCouponCode(checkout.promotionInput) : promotionModal()" expand="block" fill="{{expanded == 'promotion' || promotion? 'solid' : 'outline'}}">
+    <div class="flex-between p-l p-r " *ngIf="!loadingButton">
+      <b *ngIf="promotionInfo">{{promotionInfo.name}}</b>
+      <span *ngIf="!promotionInfo">Agrega tu cupón de descuento</span>
+      <ion-icon src="assets/icons/discount.svg" *ngIf="!promotion" class="ion-padding-start close"></ion-icon>
+      <ion-icon *ngIf="promotion" name="close-circle" color="primary" class="primary-color"></ion-icon>
+    </div>
+    
+  </ion-button>
+  <ion-button (click)="goToCheckout()" [disabled]="validCart || loadingButton || (!this.cart || loading) || updatingOrder"
+  class="flex-between linear-gradient-green-lomi" id="checkout-button" expand="block">
+  <div class="flex-between p-l p-r" *ngIf="!loadingButton">
+    <span start><b>Continuar</b></span>
+    <span end>Subtotal: <b>{{ cart.data.attributes.display_total }}</b></span>
+  </div>
+  <ion-row *ngIf="loadingButton">
+    <ion-col size="12" class="ion-text-center">
+      <ion-spinner [color]="'white'" name="crescent" class="big"></ion-spinner>
+    </ion-col>
+  </ion-row>
+</ion-button>
+</ion-footer>
+
+

@@ -1,0 +1,129 @@
+<ion-content>
+  <div [ngClass]="{'d-none' : loading}">
+  </div>
+
+  <div class="ion-padding custom-skeleton" *ngIf="!cart">
+    <br>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <br>
+    <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+    <br>
+    <br>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <br>
+    <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+    <br>
+    <br>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <br>
+    <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+  </div>
+
+
+
+  <ng-container *ngIf="cart">
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col size="12">
+          <h5>Detalles de entrega</h5>
+          <app-shipping-selector [goBackOnDismiss]="true"></app-shipping-selector>
+        </ion-col>
+      </ion-row>
+
+      <div class="aditionalInfo" id="aditional-info" *ngIf="this.addressService.shipmentType == 'pickup'">
+        <div style="margin-top:1em">
+          <ion-label style="line-height:1.7;margin-bottom:0.5em;">Nombre de quien retirará</ion-label>
+          <ion-input placeholder="Nombre" type="text" id="nameInput" [(ngModel)]="customer.name">
+          </ion-input>
+        </div>
+          
+        <div style="margin-top:1em">
+          <ion-label style="line-height:1.7;margin-bottom:0.5em;">Número de contacto</ion-label>
+          <ion-input placeholder="Teléfono" id="phoneInput" #phone value="" type="tel" [(ngModel)]="customer.phone">            
+          </ion-input>
+        </div>
+    
+      </div>
+      
+      
+      <ion-row *ngIf="cart.total > 0">
+        <ion-col size="12">
+          <h5>Selecciona un medio de pago</h5>
+        </ion-col>
+        <ion-col size="12">
+          <ion-list>
+            <ion-radio-group value="oneclick" [(ngModel)]="optionSelected">
+              <ion-item lines="none" *ngIf="cardSubscription && cardSubscription.subscribed" class="radio-custom">
+                <ion-radio slot="start" mode="md" value="oneclick"></ion-radio>
+                <img style="height:4em;margin-right:1.4em" class="payment-icon" src="assets/images/webpayPlus.png">
+                <div class="montserrat blue-lomi">
+                  <p style="margin: 1em 0 0 0"><b>{{cardInfo.cardNumber}}</b></p>
+                  <p style="margin: 0 0 1em 0" class="grey-lomi"> A traves de Webpay OneClick</p>
+                </div>
+              </ion-item>
+              <ion-item *ngIf="!cardSubscription || !cardSubscription.subscribed" (click)="subscribePaymentMethod()" lines="none" class="radio-custom">
+                <ion-radio slot="start" mode="md" value="oneclick"></ion-radio>
+                <img style="height:4em;margin-right:1.4em" class="payment-icon" src="assets/images/webpayPlus.png">
+                <div class="montserrat blue-lomi">
+                  <p style="margin: 1em 0 0 0">Registra tu tarjeta de crédito, debito o prepago y paga con un solo click</p>
+                  <p style="margin: 0 0 1em 0" class="grey-lomi"> A traves de Webpay OneClick</p>
+                </div>
+              </ion-item>
+              <ion-item *ngIf="!banSodexo" lines="none" class="radio-custom">
+                <ion-radio  slot="start" mode="md" value="sodexo"></ion-radio>
+                <img style="height:4em;margin-right:1.4em" class="payment-icon" src="assets/images/sodexo.png">
+                <div class="montserrat blue-lomi">
+                  <p style="margin: 1em 0 0 0"><b>Sodexo - Pago con contraseña</b></p>
+                  <p style="margin: 0 0 1em 0" class="grey-lomi"> Te redirigiremos a la web</p>
+                </div>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <h5 class="blue-lomi">Nota del pedido</h5>
+          <ion-textarea  placeholder="Escribe una nota..." (ionChange)="setInstructions($event)"></ion-textarea>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <app-order-detail [refreshing]="loading"></app-order-detail>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+  <div class="nav-space"></div>
+
+</ion-content>
+<ion-footer class="custom-ion-footer">
+  <div class="shake-handler" (click)="shakeIfNoInput()">
+    <ion-button (click)="complete()"
+                expand="block"
+                class="linear-gradient-green-lomi"
+                *ngIf="(optionSelected == 'oneclick' ||  !optionSelected && cart)"
+                [disabled]="!optionSelected || loading || !withData || completed">
+      <ng-container>
+        <div class="flex-between">
+          <span>Finalizar compra</span>
+          <span *ngIf="cart">{{cart.display_total}}</span>
+        </div>
+      </ng-container>
+    </ion-button>
+      <ion-button (click)="goToSodexo()"
+        expand="block"
+        class="linear-gradient-green-lomi"
+        *ngIf="optionSelected == 'sodexo' && cart"
+        [disabled]="loading">
+        <ng-container>
+        <div class="flex-between">
+        <span>Finalizar compra en Lomi.cl</span>
+        <span>{{cart.display_total}}</span>
+        </div>
+        </ng-container>
+      </ion-button>
+  </div>
+</ion-footer>

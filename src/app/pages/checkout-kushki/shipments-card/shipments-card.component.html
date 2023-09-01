@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="items-titles" (click)="openDeliveryShedule()">
+    <ion-label *ngIf="hourDelivery.day === 'Hoy' && hourDelivery.hour.id == 0" class="Montserrat delivery-select"><img src="../../../assets/images/lightning_fill.svg"> Hoy - <span>Inmediata, en la proxima hora</span></ion-label>
+    <ion-label *ngIf="hourDelivery.day === 'Hoy' && hourDelivery.hour.id != 0" class="Montserrat delivery-select">{{hourDelivery.day}} - <span>{{hourDelivery.hour.blok}}</span></ion-label>
+    <ion-label *ngIf="hourDelivery.day !== 'Hoy'" class="Montserrat delivery-select">{{hourDelivery.day}} - <span>{{hourDelivery.hour.blok}}</span></ion-label>
+    <ion-label *ngIf="!hourDelivery.day" class="Montserrat delivery-select"><span>Próximo día hábil</span></ion-label>
+    <ion-label class="Montserrat title-right">Cambiar</ion-label>
+  </div>
+  <ion-label class="Montserrat note">{{ shipment.attributes.display_final_price }}</ion-label>
+
+  <div style="display: flex" *ngIf="images" (click)="openProductsModal()">
+    <ng-container  *ngFor="let image of images; let i = index">
+      <div class="img-container" *ngIf="i <= 4">
+        <img [src]="image">
+      </div>
+    </ng-container>
+    <div *ngIf="images.length > 5">
+      <p class="extra-items Montserrat">+{{images.length - 4}}</p>
+    </div>
+  </div>
+</div>

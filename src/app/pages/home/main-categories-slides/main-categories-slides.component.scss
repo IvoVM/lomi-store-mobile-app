@@ -1,0 +1,16 @@
+.categories-container {
+    display: flex;
+    justify-content: center;
+
+    img {
+        width: 200px;
+    }
+}
+
+@media (min-width: 680px) {
+    .categories-container {    
+        img {
+            width: 400px;
+        }
+    }
+}

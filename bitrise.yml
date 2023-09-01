@@ -1,0 +1,41 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ionic
+workflows:
+  Build-ionic:
+    steps:
+    - nvm@1:
+        inputs:
+        - node_version: 12.22.8
+    - script@1:
+        title: Capacitor sync
+        inputs:
+        - content: |-
+            ionic build && ionic cap sync
+  Build-Android:
+    steps:
+    - android-build@1:
+        inputs:
+        - project_location: "$BITRISE_SOURCE_DIR/android"
+    - script@1:
+        title: Android sign
+        inputs:
+        - content: |-
+            jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $KEYSTORE $BITRISE_DEPLOY_DIR/app-release-unsigned.apk $BITRISEIO_ANDROID_KEYSTORE_ALIAS -storepass $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+            zipalign -f -v 4 $BITRISE_DEPLOY_DIR/app-release-unsigned.apk $BITRISE_SOURCE_DIR/android/app/release/app-release-signed.apk
+            ls $KEYSTORE $BITRISE_DEPLOY_DIR
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.1.x
+    machine_type_id: g2.4core
+app:
+  envs:
+  - opts:
+      is_expand: false
+    IONIC_PLATFORM: ios,android
+
+
+## Errors raised when running some steps:
+
+#/usr/libexec/java_home -V

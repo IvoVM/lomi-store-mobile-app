@@ -1,0 +1,86 @@
+<ion-content *ngIf="recepy">
+    <div class="header">
+        <img style="width: 100%;" [src]="recepy.images[0]">
+        <div class="bottom-gradient"></div>
+        <div class="inner-img top-1">
+            <div style="display:  flex;">
+                <p class="chip chip-1 Monteserrat">
+                   {{recepy.ingredients.length}} ingredientes
+                </p>
+                <p class="chip chip-1 Monteserrat">
+                    Rinde {{recepy.quantity}} porciones
+                </p>
+                <div class="close-modal">
+                    <ion-icon (click)="closeModal()" style="font-size: 1.5em; color: #FFFFFF;" name="close-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-img top-2">
+            <p class="chip chip-2 Monteserrat">
+                <ion-icon name="time"></ion-icon>{{recepy.time}} min
+            </p>
+        </div>
+        <div class="inner-img bottom-1">
+            <p class="Monteserrat">{{recepy.title}}</p>
+            <img *ngIf="recepy.link" (click)="sharedRecipe()" src="../../../assets/icons/shared.svg">
+        </div>
+    </div>
+
+    <div class="by">
+        <p>Por: {{recepy.createdby? recepy.createdby : 'Cristian Varas'}}</p>
+    </div>
+
+    <div>
+        <h2 class="Montserrat">Contiene:</h2>
+        <ul>
+            <ng-container *ngFor="let ingredients of recepy.ingredients">
+                <li>{{ingredients.quantity}} {{ingredients.attributes.name}}</li>
+            </ng-container>
+        </ul>
+    </div>
+
+    <div class="slide-scroll">
+        <div class="p-l montserrat product-slide-content">
+            <div *ngFor="let product of products">
+                <app-product-card [product]="product" (click)="openProduct(product)"></app-product-card>
+            </div>
+            <ng-container *ngIf="showSkeleton" style="display: flex;">
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="ion-padding">
+        <ion-button (click)="addAllProducts()" expand="block" shape="round">
+            <div class="flex-between p-l p-r">
+                <span>{{recipePrice | number}}</span>
+                <span>Agregar Todos</span>
+            </div>
+            
+        </ion-button>
+    </div>
+
+    <div class="ion-padding">
+        <div [innerHTML]="recepy.description"></div>
+    </div>
+
+
+    <div *ngIf="this.securityService.getUserData()?.data.id" class="like-container ion-padding">
+        <h3 class="Montserrat">¿Qué te ha parecido esta receta?</h3>
+        <div style="display: flex; justify-content: space-evenly;">
+            <div class="like" *ngIf="!valoration || valoration === 'like'">
+                <p class="Montserrat" style="color: rgba(194, 238, 18, 0.96); margin-right: 1em;">¡Me gustó!</p>
+                <img src="../../../assets/icons/like.png"
+                    (click)="likeRecipe()">
+            </div>
+            <div class="dont-like" *ngIf="!valoration || valoration === 'dont_like'">
+                <img src="../../../assets/icons/dont_like.svg"
+                    (click)="unLikeRecipe()">
+                <p class="Montserrat" style="color: #EE7E6A; margin-left: 1em;">No me gustó</p>
+            </div>
+        </div>
+        <ion-button *ngIf="recepy.link" (click)="sharedRecipe()" expand="block" shape="round" color="lightLomi">
+            <img src="../../../assets/icons/shared.svg"> ¡Comparte esta receta con quien quieras!
+        </ion-button>
+    </div>
+</ion-content>

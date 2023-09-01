@@ -1,0 +1,32 @@
+.arrow-btn {
+  padding: 6px 0;
+  color: var(--ion-color-primary);
+}
+
+ion-slides {
+  padding-bottom: 24px;
+}
+
+.product-slide-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.slide-scroll {
+  overflow: auto;
+  padding-bottom: 12px;
+  padding-right: 10px;
+}
+
+.important-sales-container {
+  background-color: #424962; 
+  margin-left: 16px; 
+  border-radius: 20px 0 0 20px;
+
+  .important-sales-header {
+    display: flex; 
+    justify-content: flex-start; 
+    align-items: center; 
+    height: 3.2em;
+  }
+}

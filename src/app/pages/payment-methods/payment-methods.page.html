@@ -1,0 +1,50 @@
+<ion-header translucent class="shadow">
+  <ion-toolbar>
+    <ion-title class="Montserrat dark-blue-lomi title-header">Medios de pago</ion-title>
+    <ion-buttons slot="start">
+      <ion-button class="start-button" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="editPaymentMethod()" class="end-button">
+        <ion-label>{{buttonName}}</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  
+
+  <h2 class="Montserrat" *ngIf="favorite.length > 0">Predeterminado</h2>
+  <ng-container *ngFor="let fav of favorite">
+    <app-payment-methods-card  (sendDeleteCard)="deleteCard($event)" (sendDefaultCard)="setDefaultCard($event)" [card]="fav" [color]="'#FF8A00'" [events]="sendButtonName.asObservable()"></app-payment-methods-card>
+  </ng-container>
+  <h2 class="Montserrat" *ngIf="cards.length > 0">Otros</h2>
+  <ng-container *ngFor="let card of cards">
+    <app-payment-methods-card (sendDeleteCard)="deleteCard($event)" (sendDefaultCard)="setDefaultCard($event)" [card]="card" [color]="'rgba(255, 255, 255, 0.3)'" [events]="sendButtonName.asObservable()" ></app-payment-methods-card>
+  </ng-container>
+
+  <ng-container *ngIf="cards.length === 0 && favorite.length === 0">
+    <h1 class="Montserrat no-cards" >¡Ey,<br>No has registrado ninguno aún!</h1>
+  </ng-container>
+
+  <ng-container *ngIf="loader">
+    <app-loader-spinner></app-loader-spinner>
+    <p class="Montserrat ion-text-center" style="color: #03c686; margin: 0;">Estamos elimando la tarjeta</p>
+  </ng-container>
+
+</ion-content>
+
+<ion-footer style="padding-bottom: 5%;">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="createCard()" style="--background:var(--ion-color-primary);--color: white; height: 2.5em;" expand="block" >
+          Registrar nueva tarjeta
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,14 @@
+<ion-header translucent *ngIf="product">
+  <ion-toolbar>
+    <ion-title>{{product.attributes.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="tertiary" (click)="dismiss()" class="btn-dismiss"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-product-detail *ngIf="product"
+                      [product] = "product"
+                      ></app-product-detail>
+</ion-content>

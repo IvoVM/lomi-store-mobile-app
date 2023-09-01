@@ -1,0 +1,8 @@
+<div class="p text-center">
+  <h4 style="margin:16px 0;color:#424962;"><b>Por favor, selecciona la comuna en la que te encuentras</b></h4>
+  <p style="margin:16px 0">Mostramos nuestro inventario en tiempo real. 
+    Así, nos aseguramos de que recibas los mismos productos que pides. </p>
+  <ion-input  id="county-select-input" [value]="county" (click)="selectCounty()" style="margin:32px 0 8px 0;" placeholder="Busca tu comuna aquí"></ion-input>
+  <ion-button id="county-select-button" (click)="exit()" style="width:100%;margin:8px 0 32px 0;" color="primary">Seleccionar</ion-button>
+  <h6 *ngIf="!isloggedIn" (click)="login()" class="primary-color"><b>Inicia sesión / regístrate</b></h6>
+</div>

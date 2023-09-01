@@ -1,0 +1,150 @@
+ion-header  {
+    min-height: 5.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow{
+
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.05);
+    ion-toolbar{
+        background-size: cover !important;
+      }
+    
+}
+.title-header {
+    letter-spacing: -0.02em;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 22px;
+    padding-top: 0.3em;
+}
+
+.start-button {
+    padding-top: 0.3em;
+    font-size: 0.875em;
+    ion-icon {
+        color: #2d2d2d !important;
+    }
+}
+
+ion-content {
+    --background: #F6F6F6;
+}
+
+ion-row {
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem 0px;
+}
+
+.card-methods {
+    background: #FFFFFF;
+    border-radius: 15px;
+}
+
+.card-methods.disable-method {
+    opacity: 0.4;
+}
+
+.card-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 21px;
+
+    .add-button {
+        font-size: 0.65em;
+
+    }
+    ion-button{ 
+        font-size: 0.8em;
+    }
+}
+
+.icon-container, .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.05);
+
+    ion-icon {
+        font-size: 1.5em;
+    }
+}
+
+.icon-container {
+    height: 30px;
+    width: 30px;
+}
+
+.logo-container {
+    height: 45px;
+    width: 45px;
+
+    img {
+        max-width: 90%;
+    }
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: 0.74em;
+    margin-bottom: 0.01em;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0px;
+    letter-spacing: -0.408px;
+    color: #B0B1B3;
+}
+
+.add-icon {
+    background-color: #00C686;
+    border-radius: 100%; 
+    color: #FFFFFF;
+    font-size: 1.1em;
+}
+
+.ellipse-icon {
+    border-radius: 100%; 
+    font-size: 1.4em;
+}
+
+img {
+    border-radius: 0px;
+}
+
+.divider {
+    border: 1px solid #F1F1F1;
+    margin: 10px 10px 0px 10px;
+  }
+
+.alcohol-sodexo {
+    color: #B0B1B2;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 15px;
+    letter-spacing: -0.408px;
+    text-align: center;
+}

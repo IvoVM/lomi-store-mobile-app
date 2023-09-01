@@ -1,0 +1,27 @@
+ion-toolbar {
+    margin: 0 -8px;
+
+     .back-button {
+        font-size: 20px; 
+        color: #424962 !important;
+    }
+}
+
+.title-page {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: -0.7em;
+    padding-bottom: 0px;
+}
+
+.title-input {
+    font-weight: 500;
+    font-size: 0.7em;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: 0.9em;
+}

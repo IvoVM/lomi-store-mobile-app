@@ -1,0 +1,65 @@
+
+.shipping-selector-container {
+  padding: 0;
+  font-size: 1rem;
+  b {
+    margin-right: 5px;
+    color: var(--ion-color-primary);
+  }
+
+  
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
+.caret{
+    font-size: 1.4em;
+    margin-top: 0.3em;
+    margin-left: 0.3em;
+    fill: #00C686;
+} 
+
+.hour{
+  font-size: 0.85em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  ion-icon{
+    margin-right: 0.5em;
+    font-size: 1em;
+    color: black;
+  }
+}
+
+.address{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: -0.75em;
+  width: 90%;
+}
+
+p{
+  margin: 0em 0 0.5em 0;
+}
+
+.warning-message {
+  background-color: #F1F1F1;
+  display: flex;
+  
+  ion-label {
+    font-weight: 500;
+    font-size: 10.4px;
+    line-height: 13px;
+    letter-spacing: -0.02em;
+    color: #7E7E7E;
+  }
+
+  ion-icon {
+      color: #7E7E7E;
+  }
+}

@@ -1,0 +1,89 @@
+.header {
+    background: url('../../../assets/images/lomibox/no_box_img.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -10vw;
+    height: 30vw;
+    width: 100%;
+}
+
+.close-modal {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
+h3 {
+    font-size: 1.3em;
+    letter-spacing: -0.408px;
+    color: #424962;
+    margin-top: 1.3em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.message {
+    margin-top: 0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #9F9F9F;
+}
+
+.warning {
+    margin: 0;
+    font-style: normal;
+    font-size: 0.9em;
+    color: #424962;
+}
+
+.box-price {
+    font-weight: 600;
+}
+
+.box-title {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #424962;
+}
+
+.option-value {
+    border: 1px solid var(--ion-color-primary);
+    display: inline-block;
+    width: auto;
+    margin: 5px 3px;
+    padding: 5px 10px;
+    border-radius: 15px;
+
+    border: 1px solid var(--ion-color-primary) !important;
+    color: var(--ion-color-primary);
+
+    &.active {
+        background-color: var(--ion-color-primary);
+        color: white !important;
+    }
+}
+
+
+.product-slide-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.slide-scroll {
+    overflow: auto;
+    padding-bottom: 12px;
+    padding-right: 10px;
+}
+
+
+.inner-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

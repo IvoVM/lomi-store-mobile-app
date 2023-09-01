@@ -1,0 +1,38 @@
+<ion-content>
+  <div class="header" style="height: 200px;">
+    <img [src]="bgImg" alt="">
+  </div>
+  <div class="close-modal">
+    <ion-icon (click)="closeModal()" style="font-size: 1.5em;" name="close-outline"></ion-icon>
+  </div>
+  <div class="container-list-recepy ion-padding">
+    <div class="scroll-nav-container">
+      <div class="p-l p-r scroll-nav">
+        <ng-container *ngFor="let category of categoryBox">
+          <div class="button" (click)="selectTab(category.name, category.image)"
+          [ngClass]="selectedTab == category.name ? 'active': ''">
+          {{category.name}}
+        </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col style="margin-top: 0px;" *ngFor="let box of boxFilter" size="6">
+          <app-lomibox-card [box]="box"></app-lomibox-card>
+        </ion-col>
+        <div *ngIf="!boxFilter.length" style="display: flex; align-items: center; flex-direction: column; text-align: center;">
+          <img src="assets/images/basket.svg" alt="basket" class="image-empty" width="230">
+          <h2>No hay Lomi-Mix para esta categoría</h2>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+
+
+</ion-content>

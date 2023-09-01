@@ -1,0 +1,78 @@
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+
+  <div class="scroll-nav-container" *ngIf="taxonsChildren.length">
+    <div class="p-l p-r scroll-nav">
+      <div class="button" (click)="updateProducts(taxon.id, true, true)"
+           [ngClass]="{'active': parentId === taxon.id}">
+          Todos
+      </div>
+      <ng-container>
+        <ng-container *ngFor="let taxonChild of taxonsChildren">
+          <div *ngIf="taxonChild.haveProducts == true" class="button" (click)="updateProducts(taxonChild.id, true)"
+               [ngClass]="{'active': parentId === taxonChild.id , 'withoutChildren': taxonChild.haveProducts == false}">
+            {{taxonChild.attributes.name}}
+          </div>
+        </ng-container>
+        
+        <ng-container *ngFor="let taxonChild of taxonsChildren">
+          <div *ngIf="!taxonChild.haveProducts" class="button" (click)="updateProducts(taxonChild.id, true)"
+          [ngClass]="{'active': parentId === taxonChild.id , 'withoutChildren': taxonChild.haveProducts == false}">
+          {{taxonChild.attributes.name}}
+        </div>
+      </ng-container>
+      
+    </ng-container>
+    </div>
+  </div>
+  <div *ngIf="tertiaryLayer.length" class="nav-space"></div>
+
+  <div class="scroll-nav-container" *ngIf="tertiaryLayer.length">
+    <div class="p-l p-r scroll-nav">
+      <div class="button" (click)="updateProducts(taxon.id)"
+           [ngClass]="{'active': selectedChild === taxon.id}">
+          Todos
+      </div>
+      <ng-container>
+        <ng-container *ngFor="let taxonChild of tertiaryLayer">
+          <div *ngIf="taxonChild.haveProducts == true" class="button" (click)="updateProducts(taxonChild.id)"
+               [ngClass]="{'active': selectedChild === taxonChild.id , 'withoutChildren': taxonChild.haveProducts == false}">
+            {{taxonChild.attributes.name}}
+          </div>
+        </ng-container>
+        
+        <ng-container *ngFor="let taxonChild of tertiaryLayer">
+          <div *ngIf="!taxonChild.haveProducts" class="button" (click)="updateProducts(taxonChild.id)"
+          [ngClass]="{'active': selectedChild === taxonChild.id , 'withoutChildren': taxonChild.haveProducts == false}">
+          {{taxonChild.attributes.name}}
+        </div>
+      </ng-container>
+      
+    </ng-container>
+    </div>
+
+  </div>
+  <!-- <div class="nav-space" *ngIf="taxonBanner && taxonsChildren.length">
+
+  </div> -->
+
+  <div id="parentDiv" class="scroll-container">
+    <div class="nav-space"></div>
+    <div class="section-item">
+      <ion-row class="ion-text-center">
+        <ng-container *ngIf="isEmpty">
+          <ion-col size="12" class="ion-text-center">
+            <img src="assets/images/basket.svg" alt="basket" class="image-empty" width="230">
+            <h5>No se encontraron productos</h5>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+      <ion-row class="ion-text-center" *ngIf="products.length">
+        <ion-col size="4" *ngFor="let product of products">
+          <app-product-card (click)="openProduct(product)" [product]="product"></app-product-card>
+        </ion-col>
+      </ion-row>
+      <app-loader-spinner *ngIf="(!taxon || !products.length || (links.self !== links.total)) && !isEmpty"></app-loader-spinner>
+    </div>
+  </div>
+</ion-content>

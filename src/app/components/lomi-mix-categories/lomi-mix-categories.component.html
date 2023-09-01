@@ -1,0 +1,8 @@
+<app-title-link  *ngIf="titleLink && categoryBox.length" [title]="'Conoce nuestros Lomi-mix!'" [link]="'/tabs/discover/lomibox'"></app-title-link>
+<div class="slides-x-scroll ion-padding" style="padding-top: 0;">
+  <div class="slides-content-scroll p-l">
+      <ng-container *ngFor="let category of categoryBox">
+          <img class="category-img" [src]="category.image" (click)="goToCategory(category.name, category.image)">
+      </ng-container>
+  </div>
+</div>

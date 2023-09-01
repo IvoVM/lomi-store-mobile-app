@@ -1,0 +1,210 @@
+.title {
+  font-size: .65rem;
+  margin-bottom: 0;
+  margin-top: 2px;
+  text-align: center;
+  //word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+img {
+  border-radius: 16px;
+  height: auto;
+
+}
+
+.img-container {
+  min-height: 24vw;
+  background-size: cover;
+}
+
+.no-img {
+  background-image: url(/assets/images/product_1.png);
+}
+
+.product-card {
+
+  .container {
+    padding: 0.25em;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  margin: 0 5px !important;
+  border-radius: 20px;
+  min-height: 10em;
+  min-width: 28.5vw;
+  max-width: 35vw;
+  transition: 0.5s ease;
+  overflow: visible;
+}
+
+.body {
+  .title {
+    height: 2em;
+    --color: #2D2D2D;
+    color: #2D2D2D;
+  }
+}
+
+.animate {
+  box-shadow: none !important;
+}
+
+.price {
+  font-size: .7rem;
+  margin-bottom: 0;
+  font-weight: 800;
+  margin-top: .4rem;
+  text-align: center;
+}
+
+.product-img {
+  max-width: 100%;
+  height: auto
+}
+
+.dcto-price {
+  font-size: .6rem;
+  color: #FF0000;
+  text-decoration: line-through;
+  min-height: 1em;
+}
+
+.dcto-percentage {
+  position: absolute;
+  top: -2em;
+  font-size: .6rem;
+  background: #FF7663;
+  border-radius: 25px;
+  padding: 0px 0px;
+  color: #fff;
+  left: 0.5em;
+  width: 45%;
+  height: 1.3em;
+  margin-top: .1rem;
+}
+
+.img-container {
+  padding: 0.25em 5%;
+  height: 100px;
+
+  .charging {
+    width: 28vw;
+  }
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.product-card-text {
+  text-align: left !important;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.dcto-row {
+  display: flex;
+  align-items: center;
+}
+
+.options-text {
+  font-size: .60rem;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  //--color: var(--ion-color-tertiary);
+  --color: #A7A7A7;
+  padding: 10px 12px;
+  color: #A7A7A7;
+}
+
+.alternatives-text {
+  --color: #03c686 !important;
+  color: #03c686 !important;
+  font-weight: bold;
+  z-index: 2000 !important;
+  position: relative;
+  letter-spacing: -.5px;
+}
+
+.alternatives-block {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  color: red;
+  background: #F1F1F1;
+  border-radius: 0 0 20px 20px;
+}
+
+ion-fab {
+  * {
+    --margin-left: 0 !important;
+    --margin-right: 0 !important;
+    --margin-top: 0 !important;
+    --margin-bottom: 0 !important;
+    --padding-start: 0 !important;
+    --padding-end: 0 !important;
+    --padding-top: 0 !important;
+    --padding-bottom: 0 !important;
+  }
+
+  right: 4px;
+  transition: 0.5s ease;
+  display: flex;
+  z-index: 1000 !important;
+  overflow: hidden;
+  width: 37px;
+
+  ion-toolbar {
+    right: 0px;
+    transition: 0.5s ease;
+    border: 1.5px solid #E5E5E5;
+    border-radius: 2em;
+    background: white;
+    display: flex;
+    align-items: center;
+    width: 37px;
+    height: 37px;
+  }
+
+  ion-button, ion-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  ion-buttons {
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .add-button {
+    --background: white !important;
+    //min-width: 26px !important;
+  }
+
+  &.fab-open {
+    right: 4px;
+    width: calc(100% - 8px);
+
+    ion-toolbar {
+      width: 100%;
+      height: 37px;
+    }
+
+    ion-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    ion-button {
+      height: 35px !important;
+    }
+  }
+}  

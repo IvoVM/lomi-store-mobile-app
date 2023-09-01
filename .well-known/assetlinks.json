@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "cl.lomi.app",
+                 "sha256_cert_fingerprints": ["E5:D0:54:2C:29:6F:CB:26:90:73:C4:0C:45:34:B4:70:BF:78:E4:B4:8F:DC:EB:19:25:0E:A7:C5:87:BF:E6:EE"] }
+  }]

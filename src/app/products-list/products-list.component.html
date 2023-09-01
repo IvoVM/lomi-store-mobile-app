@@ -1,0 +1,6 @@
+<div class="p grid-3">
+
+  <div *ngFor="let product of products">
+    <app-product-card [product]="product" (click)="openProduct(product)"></app-product-card>
+  </div>
+</div>

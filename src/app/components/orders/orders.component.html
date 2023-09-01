@@ -1,0 +1,51 @@
+<app-login-component *ngIf="!logged"></app-login-component>
+<ion-grid class="ion-padding" *ngIf="logged">
+  <h1 style="text-align: center;" *ngIf="!loading && !orders.length">No hay ordenes aún</h1>
+  <h1 feature-flag [variant]="true" name="repeat-order" class="Montserrat"
+    style="text-align: center; font-weight: 700; font-size: 17px;" *ngIf="!loading && orders.length">Selecciona uno de
+    tus pedidos anteriores para
+    agregar todos los productos disponibles a tu carrito</h1>
+  <div *ngIf="!loading && orders.length" feature-flag [variant]="true" name="repeat-order" class="border-top"></div>
+  <ng-container *ngFor="let order of orders; let i  = index">
+    <ion-row class="container" [ngClass]="{'border-top': i > 0}">
+      <ion-col size="12">
+        <ion-row class="ion-padding">
+          <div class="span-container">
+            <span class="main Montserrat">#{{order.attributes.number}}</span>
+            <span class="main Montserrat">{{order.attributes.display_total}}</span>
+          </div>
+          <div class="span-container">
+            <span class="secondary Montserrat">{{order.attributes.completed_at | date:'short'}}</span>
+          </div>
+          <div class="span-container">
+            <span class="third Montserrat">{{getOrderState(order.attributes.state)}} - {{getPaymentState(order.attributes.payment_state)}} - {{getShipmentState(order.attributes.shipment_state)}}</span>
+          </div>
+          <ng-container *ngIf="order.product_cdn_url">
+            <div style="display: flex; flex-direction: row;" *ngFor="let image of order.product_cdn_url; let i = index;">
+              <div class="img-container" *ngIf="i <= 4">
+                <img (click)="openProduct(order, i)" [src]="image" style="width: 100%; height: 100%;">
+              </div>
+            </div>
+            <div *ngIf="order.product_cdn_url.length > 5">
+              <p class="extra-items Montserrat">+{{order.product_cdn_url.length - 5}}</p>
+            </div>
+          </ng-container>
+          <div style="display: flex; width: 100%; margin-top: 0.5em;">
+            <ion-button style="width: 100%; height: 2em;" (click)="showOrder(order)" expand="block" fill="outline" shape="round">
+              Ver pedido
+            </ion-button>
+            <ion-button style="width: 100%; height: 2em;" (click)="repeatOrder(order)" expand="block" shape="round">
+              Repetir
+            </ion-button>
+          </div>
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+
+  </ng-container>
+  <ng-container *ngIf="loading">
+    <app-loader-spinner></app-loader-spinner>
+  </ng-container>
+  <div class="nav-space"></div>
+</ion-grid>

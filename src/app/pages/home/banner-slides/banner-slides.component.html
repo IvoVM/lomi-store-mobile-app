@@ -1,0 +1,28 @@
+<div class="slides-x-scroll" ontouchstart="">
+  <div  class="slides-content-scroll p-l">
+    <div *ngFor="let promotion of promotions; let i = index" activable>
+      <ng-container *ngIf="currenturl !== '/tabs/sales'">
+        <ion-row (click)="goToPage(promotion.path)">
+          <div class="{{!promotion.img ? 'charging' : ''}} promotion {{promotion.path ? 'ion-activatable' : ''}}" style="border-radius: 25px;overflow: hidden;margin-right: 12px;">
+            <ion-ripple-effect></ion-ripple-effect>
+            <img *ngIf="promotion.img" class="promotion-img"
+            src="{{promotion.img.replace('width=1472,height=74', 'width=1008,height=820')}}" alt="">
+          </div>
+        </ion-row>
+      </ng-container>
+      <ng-container *ngIf="currenturl === '/tabs/sales' && promotion.expires_at">
+        <ion-row  (click)="goToPage(promotion.path)">
+          <div class="{{!promotion.img ? 'charging' : ''}} promotion promotion-sales" style="border-radius: 25px;overflow: hidden;margin-right: 12px;">
+            <img *ngIf="promotion.img" class="promotion-img"
+            src="{{promotion.img.replace('width=1472,height=74', 'width=1008,height=820')}}" alt="">
+            <div class="bottom-container ">
+              <div class="bottom-bar" *ngIf="timeLeft[i].countdown < 20">
+                <p class="'Montserrat'">Quedan {{timeLeft[i].countdown}}</p>
+              </div>  
+            </div>
+          </div>
+        </ion-row>
+      </ng-container>
+    </div>
+  </div>
+</div>

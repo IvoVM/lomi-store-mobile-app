@@ -1,0 +1,17 @@
+<ion-content [scrollEvents]="true">
+  <div feature-flag name="banner-on-sales" [variant]="true" class="m-b m-t-2">
+    <app-banner-slides></app-banner-slides>
+  </div>
+  <div class="p-t">
+    <ng-container *ngIf="!taxons">
+      <app-loader-spinner></app-loader-spinner>
+    </ng-container>
+    <ng-container *ngFor="let taxon of taxons">
+      <ng-container *ngIf="taxon">
+        <app-product-slides [hideIfDoesntLoaded]="true" [taxon]="taxon.id"></app-product-slides>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="offset"></div>
+  <div class="offset"></div>
+</ion-content>

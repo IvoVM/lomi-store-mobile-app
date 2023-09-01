@@ -1,0 +1,57 @@
+<div *ngIf="variant">
+    <ion-grid (click)="openModalShipment()" class="shipping-selector-container"
+              [ngClass]="{'address-button': isCheckout && !loadingAddress}">
+      <div *ngIf="loadingAddress">
+        <ion-col size="12" class="ion-text-center loading-address">
+          <ion-spinner [color]="'primary'" name="crescent"></ion-spinner>
+        </ion-col>
+      </div>
+    <!-- <div>
+      <p class="hour blue-lomi montserrat">
+        {{ addressService.address.attributes.note }}
+      </p>
+    </div> -->
+    <div class="address" *ngIf="addressService.address">
+      <div class='text-truncate montserrat blue-lomi' style="max-width: 280px">
+        <b *ngIf="addressService.address.attributes.global">Retiro en tienda</b>
+        <b *ngIf="!addressService.address.attributes.global">Despacho</b><br>
+        <!-- {{addressService.address.attributes.address1.length >= 15 ? addressService.address.attributes.address1.slice(0,13)+"..." : addressService.address.attributes.address1}} -->
+        {{addressService.address.attributes.address1}} {{addressService.address.attributes.global? '' : ', ' + addressService.address.attributes.address2}} 
+        {{addressService.address.attributes.global? '' : ', ' + addressService.address.attributes.city}} 
+      </div>
+      <!-- <div>
+        <ion-icon class="caret" name="caret-down-outline"></ion-icon>
+      </div> -->
+    </div>
+    <div *ngIf="addressService.address">
+      <div *ngIf="addressService.address.attributes.global" class="warning-message">
+        <ion-icon class="warning-icon" name="alert-circle-outline"></ion-icon>
+        <ion-label>Tienes 24 hs para retirarlo, {{ addressService.address.attributes.note}}</ion-label>
+      </div>
+    </div>
+   
+  </ion-grid>
+</div>
+
+<div *ngIf="!variant">
+  <ion-grid (click)="openModalShipment()" class="shipping-selector-container"
+            [ngClass]="{'address-button': isCheckout && !loadingAddress}">
+    <div *ngIf="!addressService.address">
+      <ion-col size="12" class="ion-text-center loading-address">
+        <ion-spinner [color]="'primary'" name="crescent"></ion-spinner>
+      </ion-col>
+    </div>
+  <div>
+  </div>
+  <div class="address" *ngIf="addressService.address">
+    <div class='text-truncate montserrat blue-lomi' [ngClass]="isCheckout ? 'checkout-w' : 'home-w'">
+      <b *ngIf="addressService.address.attributes.global">Retiro</b>
+      <b *ngIf="!addressService.address.attributes.global">Despacho</b>
+      {{ truncateAddress(addressService.address.attributes.address1) }}
+    </div>
+    <div>
+      <ion-icon class="caret" name="caret-down-outline"></ion-icon>
+    </div>
+  </div>
+</ion-grid>
+</div>

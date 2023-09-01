@@ -1,0 +1,125 @@
+ion-header  {
+    min-height: 5.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow{
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.05);
+    // min-height: 4.5em;
+
+    ion-toolbar{
+        // --min-height: 4.3em !important;
+        background-size: cover !important;
+      }
+    
+}
+
+ion-item-sliding {
+    margin-top: 0.5em;
+    width: 95%;
+}
+
+ion-item-sliding.item-sliding-active-slide {
+    border-radius: 0px 15px 15px 0px;
+}
+.open-sliding {
+    background-color: red;
+    transform: translate3d(-100px, 0px, 0px);
+}
+
+.title-header {
+    letter-spacing: -0.02em;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 22px;
+    padding-top: 0.3em;
+}
+
+.end-button {
+    padding-top: 0.3em;
+    font-size: 0.875em;
+   
+    ion-label {
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: -0.408px;
+        animation-duration: 0s;
+    }
+}
+
+.start-button {
+    padding-top: 0.3em;
+    font-size: 0.875em;
+    ion-icon {
+        color: #2d2d2d !important;
+    }
+}
+
+ion-content {
+    --background: #F6F6F6;
+
+    .container-addresses {
+        margin: 1.2em 0.95em 0 0.95em;
+        border-radius: 0.95em;
+        padding: 0.8em;
+
+        .first-label {
+            font-weight: 600;
+            font-size: 1.1em;
+            line-height: 0.8em;
+            letter-spacing: -0.031em;
+            color: #424962;
+        }
+
+        .second-label {
+            font-weight: 500;
+            font-size: 1em;
+            letter-spacing: -0.026em;
+            color: #424962;
+        }
+
+        .third-label {
+            margin-top: 0.1em;
+            font-weight: 500;
+            font-size: 0.8em;
+            line-height: 1em;
+            letter-spacing: -0.02em;
+            color: #B0B1B3;
+        }
+
+        .container-icons {
+            display: flex;
+            justify-content: flex-end;
+
+            ion-buttons {
+                display: flex;
+                flex-direction: column;
+
+                .icon-chevron {
+                    position: absolute;
+                    top: 9.37%;
+                    bottom: 9.37%;
+                    width: 16px;
+                    height: 16px;
+                }
+                .icon-trash {
+                    position: absolute;
+                    top: 0%;
+                    bottom: 6.25%;
+                    color: #424962;
+                    width: 20px;
+                    height: 19px;
+                }
+            }
+        }
+        
+    }
+}
+
+ion-footer {
+    background-color: #F6F6F6;
+}

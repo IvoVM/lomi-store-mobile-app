@@ -1,0 +1,48 @@
+
+h4 {
+    font-size: 0.8em;
+    color: #424962;
+    margin-bottom: 0px;
+}
+
+p {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #424962;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+ion-progress-bar {
+    height: 10px;
+    border-radius: 25px;
+    background: #E0FFF4;
+}
+
+.divider {
+    margin: 16px 0;
+    border: 0.5px solid #F1F1F1;
+}
+
+
+.hel-text {
+    font-size: 0.6em;
+    color: #888888;
+}
+
+.body {
+    h4 {
+        margin-top: 0px;
+    }
+}
+
+.space {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.track_button {
+    border: 1.1px solid #03c686;
+    border-radius: 20px;
+}

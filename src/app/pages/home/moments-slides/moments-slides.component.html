@@ -1,0 +1,22 @@
+<ng-container *ngIf="taxonsService.categoriesHydrated">
+  <div class="moments-scroll" ontouchstart="">
+    <div class="moments p-l" *ngIf="moments && !inFlex" >
+      <ng-container *ngFor="let moment of moments ;let i = index;" >
+        <div class="moment" activable (click)="goToTaxon(moment)" *ngIf="!isGlobal || moment.id != 2891 ">
+            <div>
+              <ion-ripple-effect></ion-ripple-effect>
+                <img *ngIf="moment.id" class="moment-img" [src]="moment.image">
+            </div>
+          </div>
+      </ng-container>
+    </div>
+  </div>
+  
+  <div *ngIf="moments && inFlex" style="display: grid;grid-template-columns: 47% 47%;column-gap: 12px;padding-left: 12px;padding-bottom: 42px;">
+    <ng-container *ngFor="let moment of moments;let i = index">
+      <ng-container *ngIf="!isGlobal || moment.id != 2891 ">
+        <img activable *ngIf="moment.id" class="moment-img" [src]="moment.image" (click)="goToTaxon(moment)">
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>

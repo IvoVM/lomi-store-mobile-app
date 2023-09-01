@@ -1,0 +1,101 @@
+.title {
+  font-size: .9rem;
+  margin-bottom: 0;
+}
+
+.option-value {
+  font-size: 0.9rem;
+  margin-top: .3rem;
+  opacity: .6;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.price {
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.img-product {
+  width: 100%;
+}
+
+.btn-container{
+  justify-content: center;
+  margin-left: -12px;
+  border: 2px solid #F1F1F1;
+  border-radius: 20px;
+  width: 100px;
+  height: 35px;
+  display: flex;
+  ion-button{
+    width: 30%;
+    --background: white !important;
+    font-size: 0.59em;
+    ion-icon{
+      transform: scale(2.5);
+    }
+  }
+}
+
+.no-stock {
+  .title, .option-value {
+    color: red;
+  }
+  
+  .pill {
+    position: absolute;
+    right: -20vw;
+    top: 0;
+    background: red;
+    display: inline-block;
+    border-radius: 4px;
+    color: white;
+    padding: 0 10px;
+  }
+}
+
+.delete-item {
+  border: 1px solid red;
+  color: red;
+  background: transparent;
+  width: 100%;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.no-stock-container{
+  color: #FF7663;
+  ion-icon{
+    fill: #FF7663;
+    color: #FF7663
+  }
+  border: 2px solid #FF7663;
+  justify-content: space-between !important;
+    align-items: center;
+    font-size: 0.8em;
+    padding: 0 0.5em;
+}
+
+.trash-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: auto;
+}
+
+ion-item{
+  background: white !important;
+  margin: 6px 16px;
+  border-radius: 10px;
+  --padding-start:0;
+  --padding-end:0;
+  ion-col{
+    max-height: 100%;
+    padding: 0 0.75em 0 0.25em !important;
+  }
+  h4, p{
+    margin: 0;
+  }
+}

@@ -1,0 +1,204 @@
+<ion-content fullscreen style="--background: #F6F6F6;">
+
+  <ng-container *ngIf="cart">
+    <div class="ion-padding">
+      <div class="items-titles">
+        <ion-label class="Montserrat title-left">Detalles de entrega</ion-label>
+        <ion-label class="Montserrat title-right">Cambiar</ion-label>
+      </div>
+      <ion-grid>
+        <ion-row class="container-items ion-padding">
+          <ion-col size="12">
+            <app-shipping-selector></app-shipping-selector>
+          </ion-col>
+          <ion-col size="12">
+            <div class="divider"></div>
+          </ion-col>
+          <ion-col (click)="openNoteModal()" size="12" style="display: flex; justify-content: space-between;">
+            <ion-label class="Montserrat title-note" style="margin-top: 1em;" position="stacked">Notas: <br>
+              <span class="Montserrat note">{{specialInstructions ? specialInstructions: 'Alguna nota, aclaración'}}</span>
+            </ion-label>
+            <ion-button fill="clear" >
+              <ion-icon style="color: #424962;" name="create-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+            <ion-col *ngIf="this.addressService.shipmentType == 'pickup'" size="12">
+              <div class="divider"></div>
+            </ion-col>
+            <ion-col *ngIf="this.addressService.shipmentType == 'pickup'" size="12">
+              <div class="label-container">
+                <ion-label class="title-input" position="stacked">Nombre de quien retirará</ion-label>
+                <ion-label class="title-input required" position="stacked">Campo obligatorio*</ion-label>
+              </div>
+              <ion-input type="text" placeholder="Nombre" [(ngModel)]="customer.name"></ion-input>
+            </ion-col>
+
+            <ion-col *ngIf="this.addressService.shipmentType == 'pickup'" size="12">
+              <div class="label-container">
+                <ion-label class="title-input" position="stacked">Número de contacto</ion-label>
+                <ion-label class="title-input required" position="stacked">Campo obligatorio*</ion-label>
+              </div>
+              <ion-input type="tel" placeholder="telèfono" [(ngModel)]="customer.phone">
+                <ion-note style="margin-left: 0.5rem;" slot="start">+56 </ion-note> 
+              </ion-input>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ng-container *ngIf="shipments && shipments.length > 0">
+            <ion-label class="Montserrat title-left">Envíos</ion-label>
+            <br>
+            <ion-label class="Montserrat note">{{ shipments.length }} envíos</ion-label>
+  
+            <div class="shipments-container">
+              <div class="shipments-scroll">
+                <div *ngFor="let shipment of shipments" class="container-items ion-padding" style="margin-right: 0.5em;">
+                  <app-shipments-card [shipment]="shipment"></app-shipments-card>
+                </div>
+              </div>
+            </div>
+        </ng-container>
+      </ion-grid>
+
+
+      <div class="items-titles">
+        <ion-label class="Montserrat title-left">Método de pago</ion-label>
+        <ion-label class="Montserrat title-right" (click)="selectPaymentMethod()">Cambiar</ion-label>
+      </div>
+      <ion-grid fixed>
+        <ion-row *ngIf="!optionSelected" class="container-items ion-padding payment-method">
+          <ion-col class="ion-padding" size="12">
+            <ion-label class="Montserrat">Seleccionar método de pago</ion-label>
+            <ion-button  (click)="selectPaymentMethod()" fill="clear">
+              <ion-icon class="add-icon" slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+
+        </ion-row>
+
+        <ion-row *ngIf="optionSelected" class="container-items ">
+          <ion-col class="card-left ion-padding-top ion-padding-bottom"  size="2">
+            <ng-container *ngIf="paymentMetodData"> 
+              <div class="icon-container" *ngIf="paymentMetodData.attributes.provider.toLowerCase() === 'visa'">
+                <img style="width: 100%;" src="../../../assets/images/visa_3.svg">
+              </div>
+              <div  class="icon-container" *ngIf="paymentMetodData.attributes.provider.toLowerCase() === 'mastercard'" style="background-color: #E5E5E5;">
+                <img style="width: 17px; height: 11px;" src="../../../assets/images/mastercard.png">
+              </div>
+              <div  class="icon-container" *ngIf="paymentMetodData.attributes.provider.toLowerCase() === 'redcompra'"  style="background-color: #FFFFFF;">
+                <img src="../../../assets/images/redcompra.svg">
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!paymentMetodData">
+                <div class="logo-container" style="background-color: #FFFFFF; overflow: hidden;">
+                  <img *ngIf="optionSelected === 'webpay'" src="../../../assets/images/webpay_oneclick.svg" >
+                  <img *ngIf="optionSelected === 'oldWebPay'" src="../../../assets/images/webpayPlus.png" >
+                  <img *ngIf="optionSelected === 'sodexo'" src="../../../assets/images/Sodexo_logo.svg" >
+                  <img *ngIf="optionSelected === 'edenred'" src="../../../assets/images/edenred_logo.png" >
+                  <img *ngIf="optionSelected === 'mercadopago'" src="../../../assets/images/mercadopago_logo.png" >
+              </div>
+              </ng-container>
+          </ion-col>
+          <ion-col class="card-center ion-padding-top ion-padding-bottom" size="8">
+            <h1 *ngIf="optionSelected !== 'mercadopago' && optionSelected !== 'webpay' && optionSelected !== 'sodexo' && optionSelected !== 'oldWebPay' && optionSelected !== 'edenred'" class="Montserrat">{{paymentMetodData.attributes?.cc_type.toLowerCase() === 'debit'? 'Débito': 'Crédito'}} {{paymentMetodData.attributes?.provider}} **** {{paymentMetodData.attributes.last_digits}}</h1>
+
+            <h1 *ngIf="optionSelected === 'oldWebPay'" class="Montserrat">{{cardSubscription.oneclick_card_type | titlecase}} {{cardSubscription.oneclick_card_number.slice(-8)}}</h1>
+
+            
+            <h1 *ngIf="optionSelected === 'webpay'" class="Montserrat" style="margin-bottom: 0px;">Pago directo</h1>
+            <h2 *ngIf="optionSelected === 'webpay'" class="Montserrat">A través de Webpay</h2>
+
+            <h1 *ngIf="optionSelected === 'edenred'" class="Montserrat" style="margin-bottom: 0px;">Ticket Restaurant Edenred</h1>
+            <h2 *ngIf="optionSelected === 'edenred'" class="Montserrat">Pago con tus datos</h2>
+
+            <h1 *ngIf="optionSelected === 'sodexo'" class="Montserrat" style="margin-bottom: 0px;">Sodexo</h1>
+            <h2 *ngIf="optionSelected === 'sodexo'" class="Montserrat">Por contraseña</h2>
+
+            <h1 *ngIf="optionSelected === 'mercadopago'" class="Montserrat" style="margin-bottom: 0px;">Mercadopago</h1>
+            <h2 *ngIf="optionSelected === 'mercadopago'" class="Montserrat">Tarjeta Crédito/Débito</h2>
+          </ion-col>
+          <ion-col *ngIf="optionSelected === 'credito/debito'" class="container-bottom"  size="12">
+            <ion-label style="color: #b0b1b3; font-size: 11px;">Powered by</ion-label>
+            <img src="../../../assets/images/Logo_Kushki_Oscuro_G.png">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <ng-container *ngIf="optionSelected === 'mercadopago'">
+        <app-loader-spinner *ngIf="loadMp"></app-loader-spinner>
+        <div id="paymentBrick_container"></div>
+      </ng-container>
+
+      <ion-row style="margin-bottom: 5em;">
+        <ion-col size="12">
+          <app-order-detail-kushki [refreshing]="loading"></app-order-detail-kushki>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-container>
+</ion-content>
+
+<ion-footer class="custom-ion-footer">
+
+  <div #containerDrag style="display: flex; justify-content: center; align-items: center;">
+    <div  *ngIf="!loading && (optionSelected === 'credito/debito' || optionSelected === 'oldWebPay' || optionSelected === 'mercadopago' ) && paymentButton === 'drag' && withData" class="drag-container">
+      <div appDrag (activateEvent)="complete()" class="item-drag">
+        <ion-icon name="arrow-forward-outline" style="font-size: 20px; color: #BAF1DE;"></ion-icon>
+      </div>
+      <p style="display: flex; justify-content: center; align-items: center; font-size: 16px; color: #FFFFFF;">Desliza para pagar {{cart.display_total}}</p>
+      <div class="final">
+      </div>
+    </div>
+  </div>
+
+  <div  (click)="shakeIfNoInput()">
+    <ion-button appLongPress (paying)="startCounter($event)" (activateEvent)="complete()" expand="block" class="linear-gradient-green-lomi"
+      *ngIf="(optionSelected === 'credito/debito' || optionSelected === 'oldWebPay') && cart && paymentButton === 'long-press' " style="overflow: hidden;"
+      [disabled]="!optionSelected || loading || !withData" [color]="(!optionSelected || loading || !withData) ? '' : 'progressbar'" >
+      <ng-container >
+        <span *ngIf="withData" [ngStyle]="{'width.%': progresBarValue }" style=" z-index:-1;border-radius: 25px; background-color: #03c686;  height: 100%; position: absolute; left: -5%;">
+
+        </span>
+        <div *ngIf="progressBar" class="progress-bar-text" style="position: absolute; z-index: 9999999999;">
+          <span class="Montserrat" style="font-size: 15.5px;">Mantén presionado 3 seg. para pagar {{cart.display_total}}</span>
+        </div>
+      
+        <div  class="flex-between">
+          <span *ngIf="!progressBar"> Finalizar compra</span>
+          <span *ngIf="cart && !progressBar">{{cart.display_total}}</span>
+        </div>
+      </ng-container>
+    </ion-button>
+    <ion-button (click)="activateDrage()" expand="block" class="linear-gradient-green-lomi"
+    *ngIf="(optionSelected === 'credito/debito' || optionSelected === 'oldWebPay' || optionSelected === 'mercadopago' ) && cart && !withData && paymentButton === 'drag'"
+    [disabled]="!optionSelected || loading || !withData">
+    <ng-container>
+      <div class="flex-between">
+        <span>Finalizar compra</span>
+        <span *ngIf="cart">{{cart.display_total}}</span>
+      </div>
+    </ng-container>
+  </ion-button>
+    <ion-button  (click)="complete()" expand="block" class="linear-gradient-green-lomi"
+    *ngIf="((optionSelected === 'webpay' || optionSelected === 'edenred' ) && cart)"
+    [disabled]="!optionSelected || loading || !withData">
+    <ng-container>
+      <div class="flex-between">
+        <span>Finalizar compra</span>
+        <span *ngIf="cart">{{cart.display_total}}</span>
+      </div>
+    </ng-container>
+  </ion-button>
+    <ion-button (click)="goToSodexo()" expand="block" class="linear-gradient-green-lomi"
+      *ngIf="optionSelected == 'sodexo' && cart" [disabled]="loading || !withData">
+      <ng-container>
+        <div class="flex-between">
+          <span>Finalizar compra en Lomi.cl</span>
+          <span>{{cart.display_total}}</span>
+        </div>
+      </ng-container>
+    </ion-button>
+  </div>
+
+</ion-footer>

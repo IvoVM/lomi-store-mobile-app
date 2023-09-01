@@ -1,0 +1,43 @@
+  <ion-item-sliding  disabled  [ngClass]="buttonName === 'Listo'? 'item-sliding-active-slide item-sliding-active-options-end' : ''">
+    <ion-item lines="none" class="container-card"  [ngClass]="[ card.attributes.provider.toLowerCase() ,card.attributes.expired === true ? 'expired': '', buttonName === 'Listo'? 'open-sliding' : '']" >
+      <ion-row style="width: 100%; height: 100%;">
+        <ion-col class="card-left" size="3">
+          <div *ngIf="card.attributes.provider.toLowerCase() ==='visa'" class="image-container">
+            <img style="width: 100%;" src="../../../assets/images/visa_3.svg">
+          </div>
+          <div *ngIf="card.attributes.provider.toLowerCase() === 'mastercard'" class="image-container" style="background-color: #E5E5E5;
+          ">
+            <img  src="../../../assets/images/mastercard.png">
+          </div>
+          <div *ngIf="card.attributes.provider.toLowerCase() === 'redcompra'" class="image-container" style="background-color: #E5E5E5;
+          ">
+            <img  src="../../../assets/images/redcompra.svg">
+          </div>
+        </ion-col>
+        <ion-col class="card-center" size="7">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="Montserrat"> {{card.attributes.cc_type.toLowerCase() === 'debit'? 'Débito': 'Crédito'}} {{card.attributes.provider}} <br><span>**** {{card.attributes.last_digits}}</span></h1>
+          </div>
+        </ion-col>
+        <ion-col class="card-right" size="2">
+          <ion-button (click)="defaultCard(card)" fill="clear" >
+            <ion-icon *ngIf="!card.attributes.expired"  name="star" [style.fill]="color" ></ion-icon>
+            <p *ngIf="card.attributes.expired">VENCIDA</p>
+          </ion-button>
+          <h1 [ngStyle]="{ visibility: card.attributes.month ? '' : 'hidden' }"  >{{card.attributes.month}}/{{card.attributes.year}}</h1>
+
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item-options (click)="deleteCard(card)" style="width: 50px;" side="end">
+      <ion-item-option style="width: 50px;">
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item-option>
+    </ion-item-options>
+  
+  </ion-item-sliding>
+
+  

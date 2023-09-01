@@ -1,0 +1,13 @@
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <ion-grid>
+    <ng-container *ngIf="!producers">
+      <app-loader-spinner></app-loader-spinner>
+    </ng-container>
+    <ion-row *ngIf="producers">
+      <ion-col size="4" *ngFor="let producer of producers">
+        <app-producer-card [routerLink]="['/producers', producer.id]" [producer]="producer"></app-producer-card>
+      </ion-col>
+    </ion-row>
+    <app-loader-spinner *ngIf="!producers.length || (self !== total)"></app-loader-spinner>
+  </ion-grid>
+</ion-content>

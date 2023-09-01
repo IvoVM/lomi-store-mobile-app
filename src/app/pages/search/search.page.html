@@ -1,0 +1,31 @@
+<ion-content >
+  <ion-row class="ion-text-center">
+    <ng-container>
+      <ion-col size="12" class="ion-text-center">
+        <h5>{{keyword | titlecase }}</h5>
+      </ion-col>
+    </ng-container>
+  </ion-row>
+
+  <ng-container *ngIf="!products.length">
+    <ion-col size="12" class="ion-text-center">
+      <h5>No se encontraron productos</h5>
+    </ion-col>
+  </ng-container>
+
+  <ion-row class="ion-text-center p" *ngIf="products.length">
+    <ion-col size="4" *ngFor="let product of products">
+      <app-product-card (click)="openProduct(product)" [product]="product"></app-product-card>
+    </ion-col>
+  </ion-row>
+  
+  <ng-container *ngIf="loading">
+    <app-loader-spinner></app-loader-spinner>
+  </ng-container>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData()">
+      <ion-infinite-scroll-content loadingSpinner="null">
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
